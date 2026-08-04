@@ -427,12 +427,10 @@ h1, h2, h3 {
 }
 @media (min-width: 640px) {
   .pricing__base {
-    align-items: baseline;
-  }
-  .pricing__base-label {
-    align-self: last baseline;
+    align-items: flex-start;
   }
   .pricing__base-prices {
+    margin-top: 0.55rem;
     flex-direction: row;
     align-items: baseline;
     gap: 0.85rem;
@@ -645,11 +643,9 @@ h1, h2, h3 {
   overflow: hidden;
   border-bottom: 1px solid rgba(43, 38, 34, 0.08);
 }
-.industry-hero__inner {
-  max-width: 680px;
-}
 .industry-hero h1 {
   margin-top: 0.75rem;
+  max-width: 680px;
   font-size: clamp(2rem, 5vw, 2.9rem);
   line-height: 1.15;
 }
