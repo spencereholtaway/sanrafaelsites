@@ -59,6 +59,7 @@ h1, h2, h3 {
 /* ---------- Logo ---------- */
 .mark-icon {
   width: 28px;
+  aspect-ratio: 112.48 / 72.29;
   height: auto;
   color: var(--ink);
 }
@@ -73,7 +74,8 @@ h1, h2, h3 {
   letter-spacing: -0.01em;
 }
 .wordmark--lg {
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(2rem, 5vw, 2.625rem);
+  line-height: 1;
 }
 
 .logo {
@@ -85,7 +87,7 @@ h1, h2, h3 {
 
 .logo--stack {
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.66rem;
 }
 
 /* ---------- Nav ---------- */
