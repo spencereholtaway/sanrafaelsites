@@ -445,9 +445,23 @@ h1, h2, h3 {
 .pricing__breakdown {
   margin-top: 1.5rem;
 }
+.pricing__breakdown li {
+  align-items: flex-start;
+}
+.pricing__breakdown-caption {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  font-weight: 400;
+}
 .pricing__breakdown-subtotal {
   font-weight: 600;
   border-top: 1px solid rgba(43, 38, 34, 0.25) !important;
+}
+.pricing__breakdown-subtotal,
+.pricing__breakdown-discount {
+  align-items: baseline !important;
 }
 .pricing__breakdown-discount .pricing__addon-price {
   color: var(--gold);
@@ -652,6 +666,11 @@ h1, h2, h3 {
 }
 .industry-pricing__title {
   font-size: clamp(1.8rem, 4vw, 2.3rem);
+}
+.industry-pricing__note {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  opacity: 0.7;
 }
 .industry-pricing__compare {
   margin-top: 1.25rem;
