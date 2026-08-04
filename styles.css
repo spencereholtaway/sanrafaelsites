@@ -226,7 +226,6 @@ h1, h2, h3 {
 
 .case-study__media {
   margin-top: 2.5rem;
-  aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
@@ -234,14 +233,14 @@ h1, h2, h3 {
   justify-content: center;
 }
 .case-study__media:has(.case-study__media-placeholder) {
+  aspect-ratio: 16 / 9;
   background: rgba(244, 241, 234, 0.06);
   border: 1px dashed rgba(244, 241, 234, 0.25);
 }
 .case-study__media img,
 .case-study__media video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 .case-study__media-placeholder {
