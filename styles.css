@@ -662,6 +662,33 @@ h1, h2, h3 {
   flex-wrap: wrap;
 }
 
+.industry-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.industry-hero__media {
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  border: 1px dashed rgba(43, 38, 34, 0.25);
+  background: rgba(43, 38, 34, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.industry-hero__media-placeholder {
+  color: rgba(43, 38, 34, 0.4);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 860px) {
+  .industry-hero__grid {
+    grid-template-columns: 1fr 0.85fr;
+  }
+}
+
 /* ---------- Package contents ---------- */
 .package {
   background: var(--ink);
