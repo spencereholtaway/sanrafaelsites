@@ -426,6 +426,9 @@ h1, h2, h3 {
   opacity: 0.8;
 }
 @media (min-width: 640px) {
+  .pricing__base {
+    align-items: center;
+  }
   .pricing__base-prices {
     flex-direction: row;
     align-items: baseline;
