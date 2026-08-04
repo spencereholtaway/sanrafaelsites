@@ -501,6 +501,7 @@ h1, h2, h3 {
 .pricing__breakdown-final {
   align-items: flex-start !important;
   background: var(--ink);
+  color: var(--off-white);
   padding: 1.5rem 1.75rem;
   border-radius: 0 0 10px 10px;
   border-top: none !important;
@@ -523,6 +524,18 @@ h1, h2, h3 {
   max-width: 560px;
   margin-top: 0.75rem;
   font-size: 0.9rem;
+}
+.pricing__breakdown-final-prices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.pricing__breakdown-final-prices .pricing__base-was {
+  margin-top: 0.15rem;
+  cursor: default;
+}
+.pricing__breakdown-final-prices .pricing__base-was:hover {
+  opacity: 0.5;
 }
 
 /* ---------- Footer ---------- */
