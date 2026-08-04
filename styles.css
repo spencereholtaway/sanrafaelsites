@@ -107,6 +107,7 @@ h1, h2, h3 {
 }
 .nav__links {
   display: flex;
+  align-items: center;
   gap: 2rem;
   font-weight: 500;
   font-size: 0.95rem;
@@ -116,6 +117,62 @@ h1, h2, h3 {
   transition: opacity 0.15s ease;
 }
 .nav__links a:hover { opacity: 1; }
+
+.nav__dropdown {
+  position: relative;
+}
+.nav__dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+.nav__dropdown-toggle:hover { opacity: 1; }
+.nav__dropdown-caret {
+  width: 9px;
+  height: 9px;
+  transition: transform 0.15s ease;
+}
+.nav__dropdown.is-open .nav__dropdown-toggle { opacity: 1; }
+.nav__dropdown.is-open .nav__dropdown-caret { transform: rotate(180deg); }
+
+.nav__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 190px;
+  background: var(--off-white);
+  border: 1px solid rgba(43, 38, 34, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(43, 38, 34, 0.14);
+  padding: 0.4rem;
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 60;
+}
+.nav__dropdown.is-open .nav__dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav__dropdown-menu a {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+.nav__dropdown-menu a:hover { background: rgba(43, 38, 34, 0.05); }
 
 .nav__toggle {
   display: none;
@@ -440,6 +497,7 @@ h1, h2, h3 {
     right: 0;
     background: var(--off-white);
     flex-direction: column;
+    align-items: flex-start;
     padding: 1.5rem;
     gap: 1.25rem;
     border-bottom: 1px solid rgba(43, 38, 34, 0.08);
@@ -448,10 +506,179 @@ h1, h2, h3 {
     pointer-events: none;
     transition: opacity 0.15s ease, transform 0.15s ease;
   }
+  .nav__dropdown {
+    width: 100%;
+  }
+  .nav__dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: none;
+    padding: 0.5rem 0 0 0.25rem;
+    margin-top: 0.5rem;
+    display: none;
+  }
+  .nav__dropdown.is-open .nav__dropdown-menu {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .nav__dropdown-menu a {
+    padding: 0.5rem 0;
+    opacity: 0.75;
+  }
   .nav__links.is-open {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
   }
   .nav__toggle { display: flex; }
+}
+
+/* ==========================================================================
+   Industry landing pages (/dental-medical, /contractors, /salons, /restaurants)
+   Additive only — reuses the tokens/components above, does not modify them.
+   ========================================================================== */
+
+/* ---------- Industry hero ---------- */
+.industry-hero {
+  position: relative;
+  padding: 4rem 0 3.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(43, 38, 34, 0.08);
+}
+.industry-hero__inner {
+  max-width: 680px;
+}
+.industry-hero h1 {
+  margin-top: 0.75rem;
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  line-height: 1.15;
+}
+.industry-hero__sub {
+  margin-top: 1.1rem;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  max-width: 560px;
+}
+.industry-hero__actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Package contents ---------- */
+.package {
+  background: var(--ink);
+  color: var(--off-white);
+  padding: 4.5rem 0;
+}
+.package .eyebrow { color: var(--gold); }
+.package__title {
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  color: var(--off-white);
+}
+.package__grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+.package__group h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+.package__group ul {
+  list-style: none;
+}
+.package__group li {
+  padding: 0.7rem 0;
+  border-top: 1px solid rgba(244, 241, 234, 0.15);
+}
+.package__group li:first-of-type {
+  border-top: none;
+}
+
+/* ---------- Value prop / marketing blurb ---------- */
+.value-prop {
+  padding: 4.5rem 0;
+  border-top: 3px solid var(--pink);
+}
+.value-prop__text {
+  font-family: var(--font-head);
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: 760px;
+}
+
+/* ---------- Credibility anchor ---------- */
+.credibility-anchor {
+  padding: 2.5rem 0;
+}
+.credibility-anchor p {
+  font-size: 1rem;
+  opacity: 0.8;
+  max-width: 640px;
+}
+.credibility-anchor a {
+  font-weight: 600;
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(43, 38, 34, 0.35);
+}
+
+/* ---------- Industry pricing ---------- */
+.industry-pricing {
+  padding: 4.5rem 0;
+}
+.industry-pricing__title {
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+}
+.industry-pricing__compare {
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  max-width: 560px;
+}
+
+/* ---------- Industry CTA ---------- */
+.industry-cta {
+  background: var(--gold);
+  color: #fff;
+  padding: 4.5rem 0;
+  text-align: center;
+}
+.industry-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.industry-cta h2 {
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  color: #fff;
+  max-width: 560px;
+}
+.industry-cta p {
+  margin-top: 0.9rem;
+  opacity: 0.9;
+  max-width: 480px;
+}
+.industry-cta .btn--primary {
+  margin-top: 1.75rem;
+  background: var(--ink);
+}
+
+@media (min-width: 640px) {
+  .package__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
 }
