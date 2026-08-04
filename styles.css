@@ -388,7 +388,7 @@ h1, h2, h3 {
 .pricing__base {
   margin-top: 2.5rem;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   padding: 1.5rem 1.75rem;
@@ -408,6 +408,22 @@ h1, h2, h3 {
 .pricing__base-note {
   font-size: 0.85rem;
   opacity: 0.6;
+}
+.pricing__base-prices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+}
+.pricing__base-was {
+  font-size: 1rem;
+  text-decoration: line-through;
+  opacity: 0.5;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.pricing__base-was:hover {
+  opacity: 0.8;
 }
 .pricing__base-price {
   font-family: var(--font-head);
@@ -460,11 +476,19 @@ h1, h2, h3 {
   border-top: 1px solid rgba(43, 38, 34, 0.25) !important;
 }
 .pricing__breakdown-subtotal,
-.pricing__breakdown-discount {
+.pricing__breakdown-discount,
+.pricing__breakdown-final {
   align-items: baseline !important;
 }
+.pricing__breakdown-discount .pricing__addon-name,
 .pricing__breakdown-discount .pricing__addon-price {
   color: var(--gold);
+  font-weight: 600;
+}
+.pricing__breakdown-final {
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-top: 1px solid rgba(43, 38, 34, 0.25) !important;
 }
 
 /* ---------- Footer ---------- */
@@ -677,6 +701,7 @@ h1, h2, h3 {
   font-size: 0.95rem;
   opacity: 0.75;
   max-width: 560px;
+  scroll-margin-top: 90px;
 }
 
 /* ---------- Industry CTA ---------- */
