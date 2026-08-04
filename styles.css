@@ -425,6 +425,13 @@ h1, h2, h3 {
 .pricing__base-was:hover {
   opacity: 0.8;
 }
+@media (min-width: 640px) {
+  .pricing__base-prices {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.85rem;
+  }
+}
 .pricing__base-price {
   font-family: var(--font-head);
   font-size: 2rem;

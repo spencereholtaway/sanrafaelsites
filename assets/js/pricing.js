@@ -73,7 +73,14 @@ window.SRS_PRICING = {
     // both the on-page breakdown and the emailed breakdown from it —
     // so the two can never drift apart.
     const items = [{ label: pageNames[0], cost: rates.homepage, caption: descriptions.homepage }];
-    pageNames.slice(1).forEach((name) => items.push({ label: name, cost: rates.page }));
+    const additionalPageNames = pageNames.slice(1);
+    if (additionalPageNames.length > 0) {
+      items.push({
+        label: `${additionalPageNames.length} Additional Page${additionalPageNames.length === 1 ? "" : "s"}`,
+        cost: additionalPageNames.length * rates.page,
+        caption: `${money(rates.page)}/ea — ${additionalPageNames.join(", ")}`,
+      });
+    }
     if (hasCms) items.push({ label: "CMS setup", cost: rates.cms, caption: descriptions.cms });
     if (integrations > 0) {
       items.push({
