@@ -1,8 +1,13 @@
 /*
  * Single source of truth for San Rafael Sites pricing.
- * Change a rate or the flat package discount here and it updates
- * everywhere: the homepage pricing list and every industry package
- * card + itemized breakdown, computed at page load.
+ *
+ * - `rates` are the four shared per-item prices, used everywhere
+ *   (the homepage pricing list and every industry package's math).
+ * - `packages` holds a line-item discount per industry package,
+ *   keyed by the slug used in each page's data-pkg-id attribute.
+ *
+ * Change a number here and it updates the homepage pricing list and
+ * every industry package card + itemized breakdown at page load.
  */
 window.SRS_PRICING = {
   rates: {
@@ -11,11 +16,17 @@ window.SRS_PRICING = {
     cms: 250,
     integration: 250,
   },
-  packageDiscount: 300,
+  packages: {
+    "dental-medical": { discount: 300 },
+    "contractors": { discount: 300 },
+    "salons": { discount: 300 },
+    "restaurants": { discount: 300 },
+    "community-education": { discount: 300 },
+  },
 };
 
 (function () {
-  const { rates, packageDiscount } = window.SRS_PRICING;
+  const { rates, packages } = window.SRS_PRICING;
   const money = (n) => "$" + n.toLocaleString("en-US");
 
   // Homepage pricing list: <span data-rate="page">
@@ -24,8 +35,13 @@ window.SRS_PRICING = {
     if (rates[key] !== undefined) el.textContent = money(rates[key]);
   });
 
-  // Industry package cards: <div data-pkg data-pages="5" data-cms="1" data-integrations="1" data-integration-label="Online booking">
+  // Industry package cards:
+  // <div data-pkg data-pkg-id="dental-medical" data-pages="5" data-cms="1"
+  //      data-integrations="1" data-integration-label="Online booking">
   document.querySelectorAll("[data-pkg]").forEach((pkg) => {
+    const pkgId = pkg.getAttribute("data-pkg-id");
+    const discount = (packages[pkgId] && packages[pkgId].discount) || 0;
+
     const pages = parseInt(pkg.getAttribute("data-pages"), 10) || 1;
     const hasCms = pkg.getAttribute("data-cms") === "1";
     const integrations = parseInt(pkg.getAttribute("data-integrations"), 10) || 0;
@@ -37,7 +53,7 @@ window.SRS_PRICING = {
     const integrationsCost = integrations * rates.integration;
 
     const itemized = rates.homepage + pagesCost + cmsCost + integrationsCost;
-    const total = itemized - packageDiscount;
+    const total = itemized - discount;
 
     const priceEl = pkg.querySelector("[data-pkg-price]");
     if (priceEl) priceEl.textContent = money(total);
@@ -62,11 +78,15 @@ window.SRS_PRICING = {
           `<li><span class="pricing__addon-name">${label}</span><span class="pricing__addon-price">${money(cost)}</span></li>`
         ).join("") +
         `<li class="pricing__breakdown-subtotal"><span class="pricing__addon-name">Itemized total</span><span class="pricing__addon-price">${money(itemized)}</span></li>` +
-        `<li class="pricing__breakdown-discount"><span class="pricing__addon-name">Package discount</span><span class="pricing__addon-price">&minus;${money(packageDiscount)}</span></li>`;
+        (discount > 0
+          ? `<li class="pricing__breakdown-discount"><span class="pricing__addon-name">Package discount</span><span class="pricing__addon-price">&minus;${money(discount)}</span></li>`
+          : "");
     }
 
-    // Inline copy placeholders, e.g. <span data-pkg-itemized></span> and <span data-pkg-discount></span>
-    document.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
-    document.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(packageDiscount)));
+    // Inline copy placeholders scoped to this package's section, e.g.:
+    // <span data-pkg-itemized></span> and <span data-pkg-discount></span>
+    const scope = pkg.closest("section") || document;
+    scope.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
+    scope.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(discount)));
   });
 })();
