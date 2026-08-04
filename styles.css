@@ -90,6 +90,35 @@ h1, h2, h3 {
   gap: 0.66rem;
 }
 
+/* ---------- Promo banner ---------- */
+.promo-banner {
+  background: var(--ink);
+  color: var(--off-white);
+}
+.promo-banner__inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.promo-banner__name {
+  font-weight: 500;
+}
+.promo-banner__price {
+  color: var(--gold);
+  font-weight: 600;
+}
+.promo-banner__arrow {
+  opacity: 0.6;
+  transition: transform 0.15s ease;
+}
+.promo-banner__inner:hover .promo-banner__arrow {
+  transform: translateX(3px);
+}
+
 /* ---------- Nav ---------- */
 .nav {
   position: sticky;
