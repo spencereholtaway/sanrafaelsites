@@ -311,6 +311,77 @@ h1, h2, h3 {
 }
 .process__list p { opacity: 0.85; }
 
+/* ---------- Pricing ---------- */
+.pricing {
+  padding: 4.5rem 0;
+}
+.pricing__title {
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+}
+.pricing__dek {
+  margin-top: 0.75rem;
+  font-size: 1.05rem;
+  opacity: 0.8;
+  max-width: 480px;
+}
+
+.pricing__base {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--ink);
+  color: var(--off-white);
+  border-radius: 10px;
+}
+.pricing__base-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.pricing__base-name {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+}
+.pricing__base-note {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+.pricing__base-price {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.pricing__addons {
+  margin-top: 0.5rem;
+  list-style: none;
+}
+.pricing__addons li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid rgba(43, 38, 34, 0.1);
+}
+.pricing__addon-name {
+  font-size: 1rem;
+}
+.pricing__addon-name small {
+  display: inline;
+  opacity: 0.65;
+  font-size: 0.9em;
+}
+.pricing__addon-price {
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* ---------- Footer ---------- */
 .footer {
   padding: 3.5rem 0 2rem;
