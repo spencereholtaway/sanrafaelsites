@@ -88,7 +88,6 @@
             <ul>
               <li>Mobile-first responsive build</li>
               <li>Content management system — update services &amp; prices yourself</li>
-              <li>Booking link integration (Vagaro, Fresha, Square, etc.)</li>
             </ul>
           </div>
         </div>
@@ -113,15 +112,16 @@
         <p class="eyebrow">Pricing</p>
         <h2 class="industry-pricing__title">Salon package</h2>
 
-        <div class="pricing__base">
+        <div class="pricing__base" data-pkg data-pages="4" data-cms="1" data-integrations="0">
           <div class="pricing__base-label">
             <span class="pricing__base-name">Salon Package</span>
-            <span class="pricing__base-note">4 pages, CMS &amp; booking link included</span>
+            <span class="pricing__base-note">4 pages &amp; CMS included</span>
           </div>
-          <span class="pricing__base-price">$1,600</span>
+          <span class="pricing__base-price" data-pkg-price>$1,849</span>
         </div>
+        <ul class="pricing__addons pricing__breakdown" data-pkg-breakdown></ul>
 
-        <p class="industry-pricing__compare">Custom builds like this start around $2,150 — several discovery calls, roughly three weeks before work even starts. Pick this package instead, and we start this week.</p>
+        <p class="industry-pricing__compare">A custom quote for a site like this usually starts around <span data-pkg-itemized>$2,149</span> — several discovery calls, roughly three weeks before work even starts. Pick this package instead: <span data-pkg-discount>$300</span> off, and we start this week.</p>
 
         <ul class="pricing__addons">
           <li>
@@ -129,8 +129,8 @@
             <span class="pricing__addon-price">$300</span>
           </li>
           <li>
-            <span class="pricing__addon-name">Custom booking widget embed</span>
-            <span class="pricing__addon-price">$150</span>
+            <span class="pricing__addon-name">Booking integration <small>— Vagaro, Fresha, Square, etc.</small></span>
+            <span class="pricing__addon-price">$250</span>
           </li>
         </ul>
       </div>
@@ -165,6 +165,7 @@
     </div>
   </footer>
 
+  <script src="/assets/js/pricing.js"></script>
   <script src="/script.js"></script>
 </body>
 </html>

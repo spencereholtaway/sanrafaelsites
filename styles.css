@@ -442,6 +442,17 @@ h1, h2, h3 {
   flex-shrink: 0;
 }
 
+.pricing__breakdown {
+  margin-top: 1.5rem;
+}
+.pricing__breakdown-subtotal {
+  font-weight: 600;
+  border-top: 1px solid rgba(43, 38, 34, 0.25) !important;
+}
+.pricing__breakdown-discount .pricing__addon-price {
+  color: var(--gold);
+}
+
 /* ---------- Footer ---------- */
 .footer {
   padding: 3.5rem 0 2rem;
