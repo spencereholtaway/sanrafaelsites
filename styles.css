@@ -427,7 +427,10 @@ h1, h2, h3 {
 }
 @media (min-width: 640px) {
   .pricing__base {
-    align-items: center;
+    align-items: baseline;
+  }
+  .pricing__base-label {
+    align-self: last baseline;
   }
   .pricing__base-prices {
     flex-direction: row;
@@ -486,8 +489,7 @@ h1, h2, h3 {
   border-top: 1px solid rgba(43, 38, 34, 0.25) !important;
 }
 .pricing__breakdown-subtotal,
-.pricing__breakdown-discount,
-.pricing__breakdown-final {
+.pricing__breakdown-discount {
   align-items: baseline !important;
 }
 .pricing__breakdown-discount .pricing__addon-name,
@@ -495,10 +497,32 @@ h1, h2, h3 {
   color: var(--gold);
   font-weight: 600;
 }
+
 .pricing__breakdown-final {
+  align-items: flex-start !important;
+  background: var(--ink);
+  padding: 1.5rem 1.75rem;
+  border-radius: 0 0 10px 10px;
+  border-top: none !important;
+  margin-top: 0.5rem;
+  scroll-margin-top: 90px;
+}
+.pricing__breakdown-final .pricing__addon-name {
   font-weight: 600;
   font-size: 1.1rem;
-  border-top: 1px solid rgba(43, 38, 34, 0.25) !important;
+  color: var(--off-white);
+}
+.pricing__breakdown-final .pricing__addon-price {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  color: var(--gold);
+}
+.pricing__breakdown-final .pricing__breakdown-caption {
+  color: var(--off-white);
+  opacity: 0.75;
+  max-width: 560px;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
 }
 
 /* ---------- Footer ---------- */
@@ -705,13 +729,6 @@ h1, h2, h3 {
   margin-top: 0.75rem;
   font-size: 0.95rem;
   opacity: 0.7;
-}
-.industry-pricing__compare {
-  margin-top: 1.25rem;
-  font-size: 0.95rem;
-  opacity: 0.75;
-  max-width: 560px;
-  scroll-margin-top: 90px;
 }
 
 /* ---------- Industry CTA ---------- */

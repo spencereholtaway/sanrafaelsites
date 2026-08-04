@@ -38,6 +38,8 @@ window.SRS_PRICING = {
 (function () {
   const { rates, descriptions, packages, contactEmail } = window.SRS_PRICING;
   const money = (n) => "$" + Math.round(n).toLocaleString("en-US");
+  const titleCase = (str) =>
+    str.split(" ").map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w)).join(" ");
 
   // Homepage pricing list: <span data-rate="page">
   document.querySelectorAll("[data-rate]").forEach((el) => {
@@ -81,10 +83,10 @@ window.SRS_PRICING = {
         caption: `${money(rates.page)}/ea — ${additionalPageNames.join(", ")}`,
       });
     }
-    if (hasCms) items.push({ label: "CMS setup", cost: rates.cms, caption: descriptions.cms });
+    if (hasCms) items.push({ label: "CMS Setup", cost: rates.cms, caption: descriptions.cms });
     if (integrations > 0) {
       items.push({
-        label: `${integrations} ${integrationLabel.toLowerCase()}${integrations === 1 ? "" : "s"}`,
+        label: `${integrations} ${titleCase(integrationLabel)}${integrations === 1 ? "" : "s"}`,
         cost: integrations * rates.integration,
         caption: integrationCaption,
       });
@@ -96,12 +98,21 @@ window.SRS_PRICING = {
 
     document.querySelectorAll("[data-pkg-price]").forEach((el) => (el.textContent = money(total)));
 
+    const compareText =
+      `A custom quote for a site like this usually starts around ${money(itemized)} — several ` +
+      `discovery calls, roughly three weeks before work even starts. Pick this package instead: ` +
+      `${discountPercent}% off (${money(discountAmount)}), and we start this week.`;
+
     let rows = items.map((item) => row(item.label, item.cost, item.caption)).join("");
-    rows += `<li class="pricing__breakdown-subtotal"><span class="pricing__addon-name">Itemized total</span><span class="pricing__addon-price">${money(itemized)}</span></li>`;
+    rows += `<li class="pricing__breakdown-subtotal"><span class="pricing__addon-name">Itemized Total</span><span class="pricing__addon-price">${money(itemized)}</span></li>`;
     if (discountPercent > 0) {
-      rows += `<li class="pricing__breakdown-discount"><span class="pricing__addon-name">Package discount (${discountPercent}%)</span><span class="pricing__addon-price">&minus;${money(discountAmount)}</span></li>`;
+      rows += `<li class="pricing__breakdown-discount"><span class="pricing__addon-name">Package Discount (${discountPercent}%)</span><span class="pricing__addon-price">&minus;${money(discountAmount)}</span></li>`;
     }
-    rows += `<li class="pricing__breakdown-final"><span class="pricing__addon-name">Package price</span><span class="pricing__addon-price">${money(total)}</span></li>`;
+    rows +=
+      `<li id="pricing-breakdown-end" class="pricing__breakdown-final">` +
+      `<div><span class="pricing__addon-name">Package Total</span>` +
+      `<span class="pricing__breakdown-caption">${compareText}</span></div>` +
+      `<span class="pricing__addon-price">${money(total)}</span></li>`;
     pkg.innerHTML = rows;
 
     // Inline copy placeholders, e.g.:
@@ -124,9 +135,9 @@ window.SRS_PRICING = {
         "Here's the breakdown I saw on your site:",
         ...items.map((item) => `- ${item.label}: ${money(item.cost)}`),
         "",
-        `Itemized total: ${money(itemized)}`,
-        `Package discount (${discountPercent}%): -${money(discountAmount)}`,
-        `Package price: ${money(total)}`,
+        `Itemized Total: ${money(itemized)}`,
+        `Package Discount (${discountPercent}%): -${money(discountAmount)}`,
+        `Package Total: ${money(total)}`,
         "",
         "Looking forward to hearing from you!",
       ];
