@@ -229,11 +229,13 @@ h1, h2, h3 {
   aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
-  background: rgba(244, 241, 234, 0.06);
-  border: 1px dashed rgba(244, 241, 234, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.case-study__media:has(.case-study__media-placeholder) {
+  background: rgba(244, 241, 234, 0.06);
+  border: 1px dashed rgba(244, 241, 234, 0.25);
 }
 .case-study__media img,
 .case-study__media video {
