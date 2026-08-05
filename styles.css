@@ -62,6 +62,7 @@ h1, h2, h3 {
   aspect-ratio: 112.48 / 72.29;
   height: auto;
   color: var(--ink);
+  fill: currentColor;
 }
 .mark-icon--lg {
   width: 64px;
