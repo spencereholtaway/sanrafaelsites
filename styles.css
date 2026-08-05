@@ -407,6 +407,59 @@ h1, h2, h3 {
 .pricing__title {
   font-size: clamp(1.8rem, 4vw, 2.3rem);
 }
+.pricing__industries {
+  margin-top: 3rem;
+}
+.pricing__industries-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 1rem;
+}
+.pricing__industries-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.pricing__industry-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(43, 38, 34, 0.14);
+  border-radius: 10px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.pricing__industry-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.pricing__industry-name {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+}
+.pricing__industry-price {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+.pricing__industry-discount {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+@media (min-width: 640px) {
+  .pricing__industries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 900px) {
+  .pricing__industries-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .pricing__dek {
   margin-top: 0.75rem;
   font-size: 1.05rem;

@@ -12,7 +12,8 @@
  *
  * Change a number here and it updates the homepage pricing list, every
  * industry package's contents + pricing breakdown, the strikethrough
- * "usual" price, and the pre-filled "get in touch" email — all at once.
+ * "usual" price, the homepage's industry package cards, and the
+ * pre-filled "get in touch" email — all at once.
  */
 window.SRS_PRICING = {
   rates: {
@@ -52,12 +53,16 @@ window.SRS_PRICING = {
     (caption ? `<span class="pricing__breakdown-caption">${caption}</span>` : "") +
     `</div><span class="pricing__addon-price">${money(cost)}</span></li>`;
 
-  // Industry package breakdowns. Only one package per page is assumed
-  // throughout this file, so placeholders are matched document-wide.
+  // Package breakdowns — one or more per page. Each package's own
+  // placeholders (data-pkg-price, data-pkg-itemized, etc.) are scoped
+  // to the nearest [data-pkg-scope] ancestor (or <section>, or the
+  // whole document as a last resort) so multiple packages can safely
+  // coexist on one page — e.g. the homepage's industry package cards.
   // <ul data-pkg data-pkg-id="dental-medical"
   //     data-pages-list="Home, Services, Meet the Doctor, New Patients, Contact"
   //     data-cms="1" data-integrations="1" data-integration-label="Online booking"
-  //     data-integration-caption="Patients can book an appointment directly from your site.">
+  //     data-integration-caption="Patients can book an appointment directly from your site."
+  //     [data-pkg-compute-only — skip rendering the full breakdown list]>
   document.querySelectorAll("[data-pkg]").forEach((pkg) => {
     const pkgId = pkg.getAttribute("data-pkg-id");
     const discountPercent = (packages[pkgId] && packages[pkgId].discountPercent) || 0;
@@ -96,7 +101,17 @@ window.SRS_PRICING = {
     const discountAmount = itemized * (discountPercent / 100);
     const total = itemized - discountAmount;
 
-    document.querySelectorAll("[data-pkg-price]").forEach((el) => (el.textContent = money(total)));
+    const scope = pkg.closest("[data-pkg-scope]") || pkg.closest("section") || document;
+
+    if (pkg.hasAttribute("data-pkg-compute-only")) {
+      scope.querySelectorAll("[data-pkg-price]").forEach((el) => (el.textContent = money(total)));
+      scope.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
+      scope.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(discountAmount)));
+      scope.querySelectorAll("[data-pkg-discount-percent]").forEach((el) => (el.textContent = discountPercent + "%"));
+      return;
+    }
+
+    scope.querySelectorAll("[data-pkg-price]").forEach((el) => (el.textContent = money(total)));
 
     const compareText =
       `A custom quote for a site like this usually starts around ${money(itemized)} — several ` +
@@ -121,14 +136,14 @@ window.SRS_PRICING = {
     // Inline copy placeholders, e.g.:
     // <span data-pkg-itemized></span>, <span data-pkg-discount></span>,
     // <span data-pkg-discount-percent></span>
-    document.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
-    document.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(discountAmount)));
-    document.querySelectorAll("[data-pkg-discount-percent]").forEach((el) => (el.textContent = discountPercent + "%"));
+    scope.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
+    scope.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(discountAmount)));
+    scope.querySelectorAll("[data-pkg-discount-percent]").forEach((el) => (el.textContent = discountPercent + "%"));
 
     // "Get in touch" mailto link, pre-filled with subject + an
     // email-friendly plain-text breakdown of the same line items.
     // <a data-pkg-mailto data-pkg-name="Dental & Medical Package">
-    const mailtoEl = document.querySelector("[data-pkg-mailto]");
+    const mailtoEl = scope.querySelector("[data-pkg-mailto]");
     if (mailtoEl) {
       const pkgName = mailtoEl.getAttribute("data-pkg-name") || "package";
       const subject = `Interested in the ${pkgName}`;
