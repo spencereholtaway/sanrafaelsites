@@ -678,13 +678,18 @@ h1, h2, h3 {
 /* ---------- Footer ---------- */
 .footer {
   padding: 3.5rem 0 2rem;
+  background: var(--ink);
+  color: var(--off-white);
+}
+.footer .mark-icon {
+  color: var(--off-white);
 }
 .footer__inner {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(43, 38, 34, 0.1);
+  border-bottom: 1px solid rgba(244, 241, 234, 0.15);
 }
 .footer__location {
   margin-top: 0.6rem;
@@ -693,6 +698,7 @@ h1, h2, h3 {
 }
 .footer__contact a {
   font-weight: 600;
+  color: var(--gold);
 }
 .footer__copy {
   margin-top: 1.5rem;
