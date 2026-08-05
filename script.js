@@ -24,6 +24,9 @@ if (navDropdown && dropdownToggle) {
     e.stopPropagation();
     const isOpen = navDropdown.classList.toggle("is-open");
     dropdownToggle.setAttribute("aria-expanded", String(isOpen));
+    if (isOpen && typeof gtag === "function") {
+      gtag("event", "nav_industries_open");
+    }
   });
 
   document.addEventListener("click", (e) => {
