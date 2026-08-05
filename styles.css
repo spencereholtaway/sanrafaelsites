@@ -66,6 +66,7 @@ h1, h2, h3 {
 }
 .mark-icon--lg {
   width: 64px;
+  color: var(--gold);
 }
 
 .wordmark {
