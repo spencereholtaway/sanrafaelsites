@@ -21,6 +21,7 @@ window.SRS_PRICING = {
     page: 300,
     cms: 250,
     integration: 250,
+    photography: 500,
   },
   descriptions: {
     homepage: "Where new visitors decide whether to keep looking or reach out.",
