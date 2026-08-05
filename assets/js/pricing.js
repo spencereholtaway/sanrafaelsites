@@ -32,6 +32,7 @@ window.SRS_PRICING = {
     "salons": { discountPercent: 10 },
     "restaurants": { discountPercent: 10 },
     "community-education": { discountPercent: 15 },
+    "therapists": { discountPercent: 15 },
   },
   contactEmail: "sanrafaelsites@holtawaydesign.com",
 };
