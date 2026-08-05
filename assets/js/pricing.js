@@ -65,6 +65,7 @@ window.SRS_PRICING = {
   //     [data-pkg-compute-only — skip rendering the full breakdown list]>
   document.querySelectorAll("[data-pkg]").forEach((pkg) => {
     const pkgId = pkg.getAttribute("data-pkg-id");
+    const pkgName = pkg.getAttribute("data-pkg-name") || `${titleCase(pkgId.replace(/-/g, " "))} Package`;
     const discountPercent = (packages[pkgId] && packages[pkgId].discountPercent) || 0;
 
     const pageNames = (pkg.getAttribute("data-pages-list") || "Home")
@@ -101,17 +102,37 @@ window.SRS_PRICING = {
     const discountAmount = itemized * (discountPercent / 100);
     const total = itemized - discountAmount;
 
-    const scope = pkg.closest("[data-pkg-scope]") || pkg.closest("section") || document;
+    // "Get in touch" mailto link, pre-filled with subject + an
+    // email-friendly plain-text breakdown of the same line items.
+    const subject = `Interested in the ${pkgName}`;
+    const bodyLines = [
+      `I'm interested in your ${pkgName}.`,
+      "",
+      "Here's the breakdown I saw on your site:",
+      ...items.map((item) => `- ${item.label}: ${money(item.cost)}`),
+      "",
+      `Itemized Total: ${money(itemized)}`,
+      `Package Discount (${discountPercent}%): -${money(discountAmount)}`,
+      `Package Total: ${money(total)}`,
+      "",
+      "Looking forward to hearing from you!",
+    ];
+    const mailtoHref =
+      `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
-    if (pkg.hasAttribute("data-pkg-compute-only")) {
-      scope.querySelectorAll("[data-pkg-price]").forEach((el) => (el.textContent = money(total)));
-      scope.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
-      scope.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(discountAmount)));
-      scope.querySelectorAll("[data-pkg-discount-percent]").forEach((el) => (el.textContent = discountPercent + "%"));
-      return;
-    }
+    // Scoped to the nearest [data-pkg-scope] ancestor when present (e.g. the
+    // homepage's industry cards), otherwise the whole <main>, since a
+    // package's price/mailto elements can live in a different section than
+    // its <ul data-pkg> (the industry pages' final CTA, for example).
+    const scope = pkg.closest("[data-pkg-scope]") || pkg.closest("main") || document;
 
     scope.querySelectorAll("[data-pkg-price]").forEach((el) => (el.textContent = money(total)));
+    scope.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
+    scope.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(discountAmount)));
+    scope.querySelectorAll("[data-pkg-discount-percent]").forEach((el) => (el.textContent = discountPercent + "%"));
+    scope.querySelectorAll("[data-pkg-mailto]").forEach((el) => (el.href = mailtoHref));
+
+    if (pkg.hasAttribute("data-pkg-compute-only")) return;
 
     const compareText =
       `A custom quote for a site like this usually starts around ${money(itemized)} — several ` +
@@ -126,42 +147,14 @@ window.SRS_PRICING = {
     rows +=
       `<li id="pricing-breakdown-end" class="pricing__breakdown-final">` +
       `<div><span class="pricing__addon-name">Package Total</span>` +
-      `<span class="pricing__breakdown-caption">${compareText}</span></div>` +
+      `<span class="pricing__breakdown-caption">${compareText}</span>` +
+      `<p class="pricing__hosting-note">Hosting and your domain aren't included — Wix hosting runs about $19.99/mo, and a domain (if you don't already have one) is usually $15–20/year. Both are billed directly to you, not through us.</p>` +
+      `</div>` +
       `<div class="pricing__breakdown-final-prices">` +
       `<span class="pricing__addon-price">${money(total)}</span>` +
       `<span class="pricing__base-was">${money(itemized)}</span>` +
+      `<a class="btn btn--primary pricing__breakdown-cta" href="${mailtoHref}">Get in touch</a>` +
       `</div></li>`;
     pkg.innerHTML = rows;
-
-    // Inline copy placeholders, e.g.:
-    // <span data-pkg-itemized></span>, <span data-pkg-discount></span>,
-    // <span data-pkg-discount-percent></span>
-    scope.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
-    scope.querySelectorAll("[data-pkg-discount]").forEach((el) => (el.textContent = money(discountAmount)));
-    scope.querySelectorAll("[data-pkg-discount-percent]").forEach((el) => (el.textContent = discountPercent + "%"));
-
-    // "Get in touch" mailto link, pre-filled with subject + an
-    // email-friendly plain-text breakdown of the same line items.
-    // <a data-pkg-mailto data-pkg-name="Dental & Medical Package">
-    const mailtoEl = scope.querySelector("[data-pkg-mailto]");
-    if (mailtoEl) {
-      const pkgName = mailtoEl.getAttribute("data-pkg-name") || "package";
-      const subject = `Interested in the ${pkgName}`;
-      const bodyLines = [
-        `I'm interested in your ${pkgName}.`,
-        "",
-        "Here's the breakdown I saw on your site:",
-        ...items.map((item) => `- ${item.label}: ${money(item.cost)}`),
-        "",
-        `Itemized Total: ${money(itemized)}`,
-        `Package Discount (${discountPercent}%): -${money(discountAmount)}`,
-        `Package Total: ${money(total)}`,
-        "",
-        "Looking forward to hearing from you!",
-      ];
-      const body = bodyLines.join("\n");
-      mailtoEl.href =
-        `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }
   });
 })();

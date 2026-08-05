@@ -33,8 +33,8 @@
       </button>
 
       <nav class="nav__links" id="navMenu">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
+        <a href="/work/">Work</a>
+        <a href="/about/">About</a>
         <div class="nav__dropdown" id="navDropdown">
           <button class="nav__dropdown-toggle" id="dropdownToggle" type="button" aria-expanded="false" aria-controls="dropdownMenu">
             Industries
@@ -111,101 +111,12 @@
               <p>The redesign covered the full site: structure, visual design, and original product and lifestyle photography shot on location. Just as important was what happens after launch — a CMS setup and back-of-house workflow the team could actually run themselves, day to day, without calling a designer every time the kitchen hours change.</p>
             </div>
           </div>
-        </div>
-      </article>
 
-      <!-- Case study: Chipstack -->
-      <article class="case-study">
-        <div class="wrap">
-          <h2 class="case-study__title">Chipstack</h2>
-          <p class="case-study__dek">Expanding a microchip design software company's web presence with detailed, purpose-built product pages.</p>
-
-          <div class="case-study__media">
-            <img src="assets/img/case-studies/chipstack/cover.png" alt="Chipstack website, product pages" loading="lazy">
-          </div>
-
-          <div class="case-study__grid">
-            <div class="case-study__meta">
-              <dl>
-                <div>
-                  <dt>Role</dt>
-                  <dd>Brand Designer</dd>
-                </div>
-                <div>
-                  <dt>Worked with</dt>
-                  <dd>CEO, Chief Product Officer &amp; Chief Technology Officer</dd>
-                </div>
-                <div>
-                  <dt>Scope</dt>
-                  <dd>Web presence expansion, product page design, visual design &amp; illustration (Framer)</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div class="case-study__body">
-              <p>Chipstack builds microchip design software, and needed a website that could keep pace with a fast-moving product — one where each capability got its own detailed page instead of being crammed onto a single landing page.</p>
-              <p>The work covered the site's visual design and product illustrations, along with new product pages built out in Framer to give the software room to actually explain itself to a technical audience.</p>
-            </div>
+          <div class="case-study__more">
+            <a class="btn btn--ghost" href="/work/">See all projects</a>
           </div>
         </div>
       </article>
-
-      <!-- Case study: UCSF Liver & Kidney Health Expo -->
-      <article class="case-study">
-        <div class="wrap">
-          <h2 class="case-study__title">UCSF Liver &amp; Kidney Health Expo</h2>
-          <p class="case-study__dek">A zero-to-one website and registration system for UCSF's donor health expo — built to feel credible enough for a hospital system without losing its warmth.</p>
-
-          <div class="case-study__media">
-            <img src="assets/img/case-studies/ucsf-liver-expo26/cover.png" alt="UCSF Liver & Kidney Health Expo website" loading="lazy">
-          </div>
-
-          <div class="case-study__grid">
-            <div class="case-study__meta">
-              <dl>
-                <div>
-                  <dt>Role</dt>
-                  <dd>Wix Designer</dd>
-                </div>
-                <div>
-                  <dt>Worked with</dt>
-                  <dd>Event team, surgeons &amp; clinicians</dd>
-                </div>
-                <div>
-                  <dt>Scope</dt>
-                  <dd>Zero-to-one Wix site, brand design, registration form system</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div class="case-study__body">
-              <p>UCSF's Center for Living Organ Donation needed a site built from scratch for its annual Liver &amp; Kidney Health Expo — a public event mixing clinical education with real community outreach, aimed at donors, transplant candidates, families, and the surgeons and clinicians running it.</p>
-              <p>The build covered everything from brand and visual design to a full registration system: event sign-up, a free liver health screening with limited capacity, and eligibility questionnaires for kidney and liver donation. The goal was a site that reads as credible as the hospital system behind it, without losing the warmth of an event built around real acts of generosity.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!--
-        Next case study: duplicate an <article class="case-study"> block above,
-        swap the title, dek, media, meta, and body copy. Each one is self-contained.
-      -->
-    </section>
-
-    <section class="credibility" id="about">
-      <div class="wrap">
-        <p class="eyebrow">Background</p>
-        <div class="credibility__grid">
-          <div class="credibility__item">
-            <h3>UCSF</h3>
-            <p>Freelance web design work for UCSF.</p>
-          </div>
-          <div class="credibility__item">
-            <h3>15+ years in product design</h3>
-            <p>Including Calm, Dialpad, Zynga, and Central Saint Martins.</p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section class="process">
@@ -265,40 +176,55 @@
           <h3 class="pricing__industries-title">Save with a package tailored for your business</h3>
           <div class="pricing__industries-grid">
 
-            <a class="pricing__industry-card" href="/community-education/#pricing" data-pkg-scope>
-              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="community-education" data-pages-list="Home, About / Mission, Programs & Events, Get Involved, Contact" data-cms="1" data-integrations="1"></ul>
-              <span class="pricing__industry-name">Community &amp; Education</span>
-              <span class="pricing__industry-price" data-pkg-price>$2,294</span>
-              <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>15%</span></span>
-            </a>
+            <div class="pricing__industry-card" data-pkg-scope>
+              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="community-education" data-pkg-name="Community &amp; Education Package" data-pages-list="Home, About / Mission, Programs & Events, Get Involved, Contact" data-cms="1" data-integrations="1"></ul>
+              <a class="pricing__industry-link" href="/community-education/#pricing">
+                <span class="pricing__industry-name">Community &amp; Education</span>
+                <span class="pricing__industry-price" data-pkg-price>$2,294</span>
+                <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>15%</span></span>
+              </a>
+              <a class="btn btn--primary pricing__industry-cta" data-pkg-mailto href="mailto:sanrafaelsites@holtawaydesign.com">Get in touch</a>
+            </div>
 
-            <a class="pricing__industry-card" href="/dental-medical/#pricing" data-pkg-scope>
-              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="dental-medical" data-pages-list="Home, Services, Meet the Doctor, New Patients, Contact" data-cms="1" data-integrations="1"></ul>
-              <span class="pricing__industry-name">Dental &amp; Medical</span>
-              <span class="pricing__industry-price" data-pkg-price>$2,429</span>
-              <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
-            </a>
+            <div class="pricing__industry-card" data-pkg-scope>
+              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="dental-medical" data-pkg-name="Dental &amp; Medical Package" data-pages-list="Home, Services, Meet the Doctor, New Patients, Contact" data-cms="1" data-integrations="1"></ul>
+              <a class="pricing__industry-link" href="/dental-medical/#pricing">
+                <span class="pricing__industry-name">Dental &amp; Medical</span>
+                <span class="pricing__industry-price" data-pkg-price>$2,429</span>
+                <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
+              </a>
+              <a class="btn btn--primary pricing__industry-cta" data-pkg-mailto href="mailto:sanrafaelsites@holtawaydesign.com">Get in touch</a>
+            </div>
 
-            <a class="pricing__industry-card" href="/contractors/#pricing" data-pkg-scope>
-              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="contractors" data-pages-list="Home, Services, Gallery, About, Contact" data-cms="1" data-integrations="0"></ul>
-              <span class="pricing__industry-name">Contractors</span>
-              <span class="pricing__industry-price" data-pkg-price>$2,204</span>
-              <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
-            </a>
+            <div class="pricing__industry-card" data-pkg-scope>
+              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="contractors" data-pkg-name="Contractor Package" data-pages-list="Home, Services, Gallery, About, Contact" data-cms="1" data-integrations="0"></ul>
+              <a class="pricing__industry-link" href="/contractors/#pricing">
+                <span class="pricing__industry-name">Contractors</span>
+                <span class="pricing__industry-price" data-pkg-price>$2,204</span>
+                <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
+              </a>
+              <a class="btn btn--primary pricing__industry-cta" data-pkg-mailto href="mailto:sanrafaelsites@holtawaydesign.com">Get in touch</a>
+            </div>
 
-            <a class="pricing__industry-card" href="/salons/#pricing" data-pkg-scope>
-              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="salons" data-pages-list="Home, Services & Pricing, Gallery, Contact" data-cms="1" data-integrations="1"></ul>
-              <span class="pricing__industry-name">Salons</span>
-              <span class="pricing__industry-price" data-pkg-price>$2,159</span>
-              <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
-            </a>
+            <div class="pricing__industry-card" data-pkg-scope>
+              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="salons" data-pkg-name="Salon Package" data-pages-list="Home, Services & Pricing, Gallery, Contact" data-cms="1" data-integrations="1"></ul>
+              <a class="pricing__industry-link" href="/salons/#pricing">
+                <span class="pricing__industry-name">Salons</span>
+                <span class="pricing__industry-price" data-pkg-price>$2,159</span>
+                <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
+              </a>
+              <a class="btn btn--primary pricing__industry-cta" data-pkg-mailto href="mailto:sanrafaelsites@holtawaydesign.com">Get in touch</a>
+            </div>
 
-            <a class="pricing__industry-card" href="/restaurants/#pricing" data-pkg-scope>
-              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="restaurants" data-pages-list="Home, Menu, Events & Reservations, Contact" data-cms="1" data-integrations="1"></ul>
-              <span class="pricing__industry-name">Restaurants &amp; Bars</span>
-              <span class="pricing__industry-price" data-pkg-price>$2,159</span>
-              <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
-            </a>
+            <div class="pricing__industry-card" data-pkg-scope>
+              <ul hidden data-pkg data-pkg-compute-only data-pkg-id="restaurants" data-pkg-name="Restaurant &amp; Bar Package" data-pages-list="Home, Menu, Events & Reservations, Contact" data-cms="1" data-integrations="1"></ul>
+              <a class="pricing__industry-link" href="/restaurants/#pricing">
+                <span class="pricing__industry-name">Restaurants &amp; Bars</span>
+                <span class="pricing__industry-price" data-pkg-price>$2,159</span>
+                <span class="pricing__industry-discount">Save <span data-pkg-discount-percent>10%</span></span>
+              </a>
+              <a class="btn btn--primary pricing__industry-cta" data-pkg-mailto href="mailto:sanrafaelsites@holtawaydesign.com">Get in touch</a>
+            </div>
 
           </div>
         </div>
