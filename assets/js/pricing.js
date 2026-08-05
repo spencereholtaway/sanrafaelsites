@@ -121,10 +121,11 @@ window.SRS_PRICING = {
       `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
     // Scoped to the nearest [data-pkg-scope] ancestor when present (e.g. the
-    // homepage's industry cards), otherwise the whole <main>, since a
-    // package's price/mailto elements can live in a different section than
-    // its <ul data-pkg> (the industry pages' final CTA, for example).
-    const scope = pkg.closest("[data-pkg-scope]") || pkg.closest("main") || document;
+    // homepage's industry cards, where multiple packages coexist and must
+    // stay isolated from each other), otherwise the whole document — a
+    // package's price/mailto/discount elements can live outside <main>
+    // entirely (the industry pages' promo banner sits before it).
+    const scope = pkg.closest("[data-pkg-scope]") || document;
 
     scope.querySelectorAll("[data-pkg-price]").forEach((el) => (el.textContent = money(total)));
     scope.querySelectorAll("[data-pkg-itemized]").forEach((el) => (el.textContent = money(itemized)));
