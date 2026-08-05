@@ -593,6 +593,12 @@ h1, h2, h3 {
   opacity: 0.65;
   font-size: 0.9em;
 }
+@media (max-width: 640px) {
+  .pricing__addon-name small {
+    display: block;
+    margin-top: 0.3rem;
+  }
+}
 .pricing__addon-price {
   font-weight: 600;
   white-space: nowrap;
