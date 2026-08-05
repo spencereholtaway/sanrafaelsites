@@ -410,13 +410,9 @@ h1, h2, h3 {
 .pricing__industries {
   margin-top: 3rem;
 }
-.pricing__industries-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.55;
-  margin-bottom: 1rem;
+.pricing__industries-title {
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  margin-bottom: 1.5rem;
 }
 .pricing__industries-grid {
   display: grid;
@@ -426,19 +422,22 @@ h1, h2, h3 {
 .pricing__industry-card {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(43, 38, 34, 0.14);
+  gap: 0.5rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--ink);
+  color: var(--off-white);
+  border: 1px solid transparent;
   border-radius: 10px;
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
 .pricing__industry-card:hover {
-  border-color: var(--ink);
+  border-color: var(--gold);
   transform: translateY(-2px);
 }
 .pricing__industry-name {
   font-family: var(--font-head);
-  font-size: 1.05rem;
+  font-size: 1.4rem;
+  color: var(--off-white);
 }
 .pricing__industry-price {
   font-family: var(--font-head);
@@ -446,8 +445,8 @@ h1, h2, h3 {
   color: var(--gold);
 }
 .pricing__industry-discount {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: var(--gold);
 }
 @media (min-width: 640px) {
