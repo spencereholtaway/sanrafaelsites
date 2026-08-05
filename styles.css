@@ -430,10 +430,11 @@ h1, h2, h3 {
   padding: 4.5rem 0;
 }
 .pricing__title {
+  margin-top: 3.5rem;
   font-size: clamp(1.8rem, 4vw, 2.3rem);
 }
 .pricing__industries {
-  margin-top: 3rem;
+  margin-top: 0;
 }
 .pricing__industries-title {
   font-size: clamp(1.8rem, 4vw, 2.3rem);
@@ -445,9 +446,10 @@ h1, h2, h3 {
   gap: 1rem;
 }
 .pricing__industry-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.5rem;
   padding: 1.5rem 1.75rem;
   background: var(--ink);
   color: var(--off-white);
@@ -458,14 +460,6 @@ h1, h2, h3 {
 .pricing__industry-card:hover {
   border-color: var(--gold);
   transform: translateY(-2px);
-}
-.pricing__industry-link {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.pricing__industry-cta {
-  align-self: flex-start;
 }
 .pricing__industry-name {
   font-family: var(--font-head);
@@ -481,6 +475,20 @@ h1, h2, h3 {
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--gold);
+}
+.pricing__industry-arrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  color: var(--gold);
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.pricing__industry-card:hover .pricing__industry-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
 }
 @media (min-width: 640px) {
   .pricing__industries-grid {
