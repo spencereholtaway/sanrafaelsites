@@ -91,6 +91,7 @@
             <li><a href="/community-education/">Community &amp; Education</a></li>
             <li><a href="/dental-medical/">Dental &amp; Medical</a></li>
             <li><a href="/contractors/">Contractors</a></li>
+            <li><a href="/local-government-contracts/">Local Government Contracts</a></li>
             <li><a href="/salons/">Salons</a></li>
             <li><a href="/restaurants/">Restaurants &amp; Bars</a></li>
             <li><a href="/therapists/">Therapists</a></li>
@@ -111,7 +112,19 @@
           <span class="wordmark wordmark--lg">San Rafael Sites</span>
         </a>
 
-        <h1 class="hero__headline">A website built by someone you can grab coffee with.</h1>
+        <h1 class="hero__headline" id="heroHeadline">Local Sites for Local Businesses</h1>
+        <script>
+          (function () {
+            var headlines = [
+              "Local Sites for Local Businesses",
+              "Locally Sourced, Organic SEO",
+              "(Pond) Farm-to-Screen Websites",
+              "Sustainably Sourced Sites",
+            ];
+            var el = document.getElementById("heroHeadline");
+            el.textContent = headlines[Math.floor(Math.random() * headlines.length)];
+          })();
+        </script>
         <p class="hero__sub">San Rafael Sites is one experienced, local designer — let's meet up if you'd rather talk than type.</p>
 
         <div class="hero__actions">
