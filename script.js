@@ -48,6 +48,59 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+document.querySelectorAll(".faq__item").forEach((item) => {
+  const summary = item.querySelector("summary");
+  const panel = item.querySelector(".faq__panel");
+  if (!summary || !panel) return;
+
+  summary.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    if (prefersReducedMotion) {
+      item.open = !item.open;
+      return;
+    }
+
+    panel.removeEventListener("transitionend", panel._faqCleanup || (() => {}));
+
+    if (item.open) {
+      // Animate closed: details normally hides content the instant `open`
+      // is removed, which skips right past the CSS transition. Freezing
+      // the panel at its current height first gives the transition a
+      // starting point to animate from before we drop the attribute.
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          panel.style.maxHeight = "0px";
+        });
+      });
+      const cleanup = (evt) => {
+        if (evt.propertyName !== "max-height") return;
+        item.open = false;
+        panel.style.maxHeight = "";
+        panel.removeEventListener("transitionend", cleanup);
+      };
+      panel._faqCleanup = cleanup;
+      panel.addEventListener("transitionend", cleanup);
+    } else {
+      item.open = true;
+      panel.style.maxHeight = "0px";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        });
+      });
+      const cleanup = (evt) => {
+        if (evt.propertyName !== "max-height") return;
+        panel.style.maxHeight = "";
+        panel.removeEventListener("transitionend", cleanup);
+      };
+      panel._faqCleanup = cleanup;
+      panel.addEventListener("transitionend", cleanup);
+    }
+  });
+});
+
 if (!prefersReducedMotion && "IntersectionObserver" in window) {
   document.querySelectorAll("main > section:not(:first-of-type)").forEach((el) => {
     el.classList.add("reveal");

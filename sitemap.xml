@@ -16,6 +16,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.sanrafaelsites.com/areas-we-serve/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.sanrafaelsites.com/community-education/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -47,6 +52,11 @@
   </url>
   <url>
     <loc>https://www.sanrafaelsites.com/therapists/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sanrafaelsites.com/wix-tune-ups/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

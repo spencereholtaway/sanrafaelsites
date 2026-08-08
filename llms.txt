@@ -1,0 +1,44 @@
+# San Rafael Sites
+
+> San Rafael Sites is an independent web design studio based in San Rafael, California, building websites for small businesses across Marin County and the North Bay — including San Rafael, San Anselmo, Fairfax, Novato, and Sonoma County.
+
+San Rafael Sites is run by one experienced local designer (Spencer Holtaway), not an agency — every project is designed and built directly by the person you talk to. Sites are built on Wix (hosting from $19.99/mo) or Framer, and are mobile-first, fast, and easy for the business owner to update without calling a developer for every change.
+
+## Services
+
+- **New website design & build** — custom Wix or Framer sites, fixed-scope packages priced per industry (see Pricing below).
+- **Wix Website Tune-Ups** — for business owners who already built a site themselves on Wix and want it fixed: design clean-up, responsive/mobile fixes, and SEO optimization, done inside the existing site without a full rebuild. Starts at $500. See /wix-tune-ups/.
+- **SEO fundamentals** — page titles, meta descriptions, alt text, structured data, sitemap submission to Google Search Console.
+
+## Areas served
+
+San Rafael, Marin County (San Anselmo, Fairfax, Novato, Larkspur, San Anselmo, Mill Valley, Corte Madera), Sonoma County, and the wider Bay Area. See /areas-we-serve/ for details by area.
+
+## Industries / packages
+
+Fixed-scope packages tailored per industry, each with its own page and pricing:
+- Community & Education — /community-education/ — from $2,294
+- Dental & Medical — /dental-medical/ — from $2,429
+- Contractors & Home Services — /contractors/ — from $2,204
+- Local Government Contracts — /local-government-contracts/
+- Salons & Spas — /salons/ — from $2,159
+- Restaurants & Bars — /restaurants/ — from $2,429
+- Therapists & Counselors — /therapists/ — from $1,359
+- Wix Website Tune-Ups (fix an existing DIY Wix site) — /wix-tune-ups/ — from $500
+
+## Background
+
+Spencer Holtaway has 15 years in product design at companies including Calm, Dialpad, and Zynga, plus 20 years working with advertisers and marketers, before founding San Rafael Sites. Selected work includes the full redesign of Pond Farm Brewing Co.'s website (pondfarmbrewing.com) — see /work/.
+
+## Key pages
+
+- Homepage: https://www.sanrafaelsites.com/
+- Work / case studies: https://www.sanrafaelsites.com/work/
+- About: https://www.sanrafaelsites.com/about/
+- Areas we serve: https://www.sanrafaelsites.com/areas-we-serve/
+- Wix Tune-Ups: https://www.sanrafaelsites.com/wix-tune-ups/
+- Contact: sanrafaelsites@holtawaydesign.com
+
+## Contact
+
+Email: sanrafaelsites@holtawaydesign.com
