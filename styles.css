@@ -77,6 +77,7 @@ h1, h2, h3 {
   font-variation-settings: "WONK" 0.4, "opsz" 40;
   font-weight: 550;
   letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 .eyebrow {
@@ -465,6 +466,65 @@ h1, h2, h3 {
 }
 .process__list p { opacity: 0.85; }
 
+/* ---------- FAQ ---------- */
+.faq {
+  padding: 4.5rem 0;
+}
+.faq__title {
+  margin-top: 0.5rem;
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+}
+.faq__list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 720px;
+}
+.faq__item {
+  border-bottom: 1px solid rgba(43, 38, 34, 0.15);
+  padding: 1.1rem 0;
+}
+.faq__item summary {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+";
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq__item[open] summary::after {
+  transform: rotate(45deg);
+}
+.faq__item > .faq__panel {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+.faq__item[open] > .faq__panel {
+  max-height: 20rem;
+  opacity: 1;
+}
+.faq__item p {
+  margin-top: 0.75rem;
+  opacity: 0.85;
+  max-width: 640px;
+}
+
 /* ---------- Pricing ---------- */
 .pricing {
   padding: 4.5rem 0;
@@ -534,6 +594,35 @@ h1, h2, h3 {
   .pricing__industries-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* ---------- Wix tune-up pricing ---------- */
+.wix-pricing {
+  padding: 2.5rem 0 4.5rem;
+}
+.pricing__industry-note {
+  font-size: 0.9rem;
+  color: var(--off-white);
+  opacity: 0.7;
+}
+.wix-pricing__card {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem 2rem;
+}
+.wix-pricing__card:hover {
+  border-color: transparent;
+  transform: none;
+}
+.wix-pricing__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.wix-pricing__card .btn {
+  flex-shrink: 0;
 }
 @media (min-width: 900px) {
   .pricing__industries-grid {
@@ -1101,4 +1190,40 @@ h1, h2, h3 {
   .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.22s; }
   .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.28s; }
   .reveal-stagger.is-visible > *:nth-child(n+6) { transition-delay: 0.32s; }
+
+  /* Case study meta/body: reveal Role, Worked with, Scope, then Description in sequence */
+  .case-study__grid.reveal-sequence .case-study__meta dl > div,
+  .case-study__grid.reveal-sequence .case-study__body {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .case-study__grid.reveal-sequence.is-visible .case-study__meta dl > div,
+  .case-study__grid.reveal-sequence.is-visible .case-study__body {
+    opacity: 1;
+    transform: none;
+  }
+  .case-study__grid.reveal-sequence.is-visible .case-study__meta dl > div:nth-child(1) { transition-delay: 0.05s; }
+  .case-study__grid.reveal-sequence.is-visible .case-study__meta dl > div:nth-child(2) { transition-delay: 0.16s; }
+  .case-study__grid.reveal-sequence.is-visible .case-study__meta dl > div:nth-child(3) { transition-delay: 0.27s; }
+  .case-study__grid.reveal-sequence.is-visible .case-study__body { transition-delay: 0.38s; }
+
+  /* Pricing breakdown: reveal the base package, then each line item in order */
+  .pricing__breakdown-sequence .pricing__base,
+  .pricing__breakdown-sequence .pricing__addons > li {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .pricing__breakdown-sequence.is-visible .pricing__base,
+  .pricing__breakdown-sequence.is-visible .pricing__addons > li {
+    opacity: 1;
+    transform: none;
+  }
+  .pricing__breakdown-sequence.is-visible .pricing__base { transition-delay: 0.03s; }
+  .pricing__breakdown-sequence.is-visible .pricing__addons > li:nth-child(1) { transition-delay: 0.15s; }
+  .pricing__breakdown-sequence.is-visible .pricing__addons > li:nth-child(2) { transition-delay: 0.25s; }
+  .pricing__breakdown-sequence.is-visible .pricing__addons > li:nth-child(3) { transition-delay: 0.35s; }
+  .pricing__breakdown-sequence.is-visible .pricing__addons > li:nth-child(4) { transition-delay: 0.45s; }
+  .pricing__breakdown-sequence.is-visible .pricing__addons > li:nth-child(n+5) { transition-delay: 0.5s; }
 }

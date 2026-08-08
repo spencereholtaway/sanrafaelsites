@@ -54,9 +54,15 @@ if (!prefersReducedMotion && "IntersectionObserver" in window) {
   });
 
   document
-    .querySelectorAll(".process__list, .pricing__industries-grid, .case-study__grid")
+    .querySelectorAll(".process__list, .pricing__industries-grid")
     .forEach((el) => {
       el.classList.add("reveal-stagger");
+    });
+
+  document
+    .querySelectorAll(".case-study__grid, .pricing__breakdown-sequence")
+    .forEach((el) => {
+      el.classList.add("reveal-sequence");
     });
 
   const revealObserver = new IntersectionObserver(
@@ -71,7 +77,7 @@ if (!prefersReducedMotion && "IntersectionObserver" in window) {
     { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
   );
 
-  document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => {
+  document.querySelectorAll(".reveal, .reveal-stagger, .reveal-sequence").forEach((el) => {
     revealObserver.observe(el);
   });
 }
