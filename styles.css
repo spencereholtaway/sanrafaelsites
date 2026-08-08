@@ -563,11 +563,15 @@ h1, h2, h3 {
 }
 .pricing__industry-name {
   font-family: var(--font-head);
+  font-variation-settings: "WONK" 0.4, "opsz" 40;
+  font-weight: 550;
   font-size: 1.4rem;
   color: var(--off-white);
 }
 .pricing__industry-price {
   font-family: var(--font-head);
+  font-variation-settings: "WONK" 0.4, "opsz" 40;
+  font-weight: 550;
   font-size: 1.5rem;
   color: var(--gold);
 }
