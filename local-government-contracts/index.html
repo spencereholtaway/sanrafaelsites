@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8TMT9YLQB"></script>
+  <!-- Google tag (gtag.js) — disabled on localhost/local dev so testing doesn't pollute GA4/Ads data -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag("js", new Date());
-    gtag("config", "G-Z8TMT9YLQB");
-    gtag("config", "AW-18371892051");
+    (function () {
+      var host = location.hostname;
+      var isLocal = host === "localhost" || host === "127.0.0.1" || host === "::1" || location.protocol === "file:";
+      if (isLocal) {
+        // Belt-and-suspenders: block via the official opt-out flag, but
+        // more importantly, never call gtag("config", ...) at all — the
+        // config call itself is what fires Ads remarketing/conversion
+        // pixels (rmkt/collect, ccm/collect), which ga-disable-<ID> does
+        // NOT prevent.
+        window["ga-disable-G-Z8TMT9YLQB"] = true;
+        window["ga-disable-AW-18371892051"] = true;
+        return;
+      }
+      gtag("config", "G-Z8TMT9YLQB");
+      gtag("config", "AW-18371892051");
+    })();
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8TMT9YLQB"></script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

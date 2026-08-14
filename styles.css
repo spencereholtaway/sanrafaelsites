@@ -645,6 +645,13 @@ h1, h2, h3 {
   opacity: 0.65;
   max-width: 560px;
 }
+.pricing__philosophy-link {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+.pricing__philosophy-link a {
+  font-weight: 600;
+}
 
 .pricing__base {
   margin-top: 2.5rem;
