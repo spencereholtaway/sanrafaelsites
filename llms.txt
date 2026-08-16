@@ -2,7 +2,7 @@
 
 > San Rafael Sites is an independent web design studio based in San Rafael, California, building websites for small businesses across Marin County and the North Bay — including San Rafael, San Anselmo, Fairfax, Novato, and Sonoma County.
 
-San Rafael Sites is run by one experienced local designer (Spencer Holtaway), not an agency — every project is designed and built directly by the person you talk to. Sites are built on Wix (hosting from $19.99/mo) or Framer, and are mobile-first, fast, and easy for the business owner to update without calling a developer for every change.
+San Rafael Sites is run by one experienced, freelance, local designer (Spencer Holtaway), not an agency — every project is designed and built directly by the person you talk to. Sites are built on Wix (hosting from $19.99/mo) or Framer, and are mobile-first, fast, and easy for the business owner to update without calling a developer for every change.
 
 ## Services
 
