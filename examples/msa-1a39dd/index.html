@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Marin Society of Artists</title>
+<style>
+:root{
+  --bg:#ffffff; --surface:#faf9f7; --ink:#5f6360; --muted:#8f8f8f; --line:#e4e2de;
+  --periwinkle:#5b6fb0; --periwinkle-soft:#eceffa; --periwinkle-ink:#3e569e;
+  --orange:#e36912; --orange-soft:#fdece0; --orange-ink:#ab5a25;
+  --navy:#1f2b67; --paper:#f4efe5; --paper-line:#e4e2de;
+  --wordmark-dark:#4d4d4d; --wordmark-light:#7d7d7f;
+  --serif: Georgia, "Palatino Linotype", Palatino, serif;
+  --futura: futura-lt-w01-book, "Futura", "Century Gothic", "URW Gothic", var(--sans);
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:var(--futura);font-weight:400;}
+
+header{
+  border-bottom:1px solid var(--paper-line);
+  background:var(--paper);
+  position:sticky;top:0;z-index:10;
+}
+.nav-top{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.5rem 0.9rem;}
+.logo-mark{width:3.1rem;height:3.1rem;flex-shrink:0;}
+.wordmark{display:flex;flex-direction:column;margin-right:auto;}
+.wordmark .since{font-family:var(--futura);font-size:0.58rem;letter-spacing:0.14em;color:var(--wordmark-light);text-transform:uppercase;margin-bottom:0.25rem;}
+.wordmark .name{font-family:var(--futura);font-size:1.5rem;font-weight:400;letter-spacing:0.11em;color:var(--wordmark-dark);}
+.wordmark .name .light{color:var(--wordmark-light);}
+.tagline{font-family:var(--futura);font-size:0.78rem;letter-spacing:0.03em;color:var(--wordmark-light);}
+
+.nav-toggle{display:none;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;flex-shrink:0;background:none;border:1px solid var(--paper-line);border-radius:3px;cursor:pointer;padding:0;}
+.nav-toggle .bar{display:block;width:1.2rem;height:2px;background:var(--wordmark-dark);position:relative;}
+.nav-toggle .bar::before,.nav-toggle .bar::after{content:"";position:absolute;left:0;width:100%;height:2px;background:var(--wordmark-dark);transition:transform 0.2s;}
+.nav-toggle .bar::before{top:-6px;}
+.nav-toggle .bar::after{top:6px;}
+.nav-toggle[aria-expanded="true"] .bar{background:transparent;}
+.nav-toggle[aria-expanded="true"] .bar::before{transform:translateY(6px) rotate(45deg);}
+.nav-toggle[aria-expanded="true"] .bar::after{transform:translateY(-6px) rotate(-45deg);}
+
+.nav{display:flex;align-items:center;gap:1.6rem;padding:0.75rem 1.5rem;border-top:1px solid var(--paper-line);flex-wrap:wrap;justify-content:center;}
+.nav a{font-family:var(--futura);font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink);}
+.nav a:hover{color:var(--orange-ink);}
+
+@media(max-width:760px){
+  .nav-toggle{display:flex;}
+  .tagline{display:none;}
+  .nav{
+    display:none;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:0.4rem 0 0.6rem;
+  }
+  .nav.open{display:flex;}
+  .nav a{padding:0.75rem 1.5rem;border-top:1px solid var(--paper-line);width:100%;}
+  .nav a:first-child{border-top:none;}
+}
+@media(max-width:420px){
+  .wordmark .name{font-size:1.15rem;letter-spacing:0.07em;}
+  .logo-mark{width:2.5rem;height:2.5rem;}
+  .hero h1{font-size:1.9rem;}
+}
+@media(max-width:640px){
+  section.block{padding:2.2rem 0;}
+  .wrap{padding:0 1.2rem;}
+  .hero{padding:3.5rem 1.2rem;}
+  .block-head{flex-direction:column;align-items:flex-start;gap:0.2rem;}
+  .program-row{grid-template-columns:1fr;gap:0.1rem;}
+  .program-desc{grid-column:1;}
+  .call-row{flex-direction:column;align-items:flex-start;gap:0.3rem;}
+  .facts{gap:0.4rem 1.2rem;}
+}
+
+.hero{position:relative;background:linear-gradient(rgba(31,43,103,0.74),rgba(31,43,103,0.74)),url("assets/building.jpg") center 62%/cover no-repeat;border-bottom:1px solid var(--line);padding:5.5rem 1.5rem;text-align:center;}
+.hero h1{font-size:2.5rem;letter-spacing:0.02em;margin:0 0 0.7rem;color:#fff;text-wrap:balance;text-transform:uppercase;}
+.hero p{font-family:var(--futura);color:#f1f0ff;font-size:1.02rem;letter-spacing:0.02em;max-width:34rem;margin:0 auto 1.7rem;}
+.btn{display:inline-block;font-family:var(--futura);background:var(--orange-ink);color:#fff;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.75rem 1.5rem;border-radius:2px;margin:0.3rem;}
+.btn.ghost{background:transparent;border:1.5px solid var(--periwinkle);color:var(--periwinkle-ink);}
+.btn:focus-visible,.nav a:focus-visible,.see-all:focus-visible{outline:2px solid var(--orange-ink);outline-offset:2px;}
+.hero .btn{background:#fff;color:var(--navy);}
+.hero .btn.ghost{background:rgba(28,43,107,0.35);border:1.5px solid #fff;color:#fff;}
+
+.facts{display:flex;flex-wrap:wrap;gap:0.4rem 2rem;justify-content:center;padding:1rem 1.5rem;border-bottom:1px solid var(--line);background:var(--surface);font-family:var(--futura);font-size:0.82rem;color:var(--muted);letter-spacing:0.02em;}
+.facts b{color:var(--ink);font-weight:700;}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem;}
+.nav-top{max-width:1200px;margin:0 auto;}
+section.block{padding:3rem 0;border-bottom:1px solid var(--line);}
+.block-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:0.3rem;}
+.block-head h2{font-size:1.5rem;letter-spacing:0.05em;text-transform:uppercase;margin:0;color:var(--navy);}
+.see-all{font-family:var(--futura);font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--orange-ink);white-space:nowrap;}
+.lede{color:var(--muted);font-size:0.92rem;margin:0 0 1.6rem;max-width:38rem;}
+
+.exhibits{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;}
+.exhibit{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--surface);}
+.exhibit-img{height:11rem;background-size:cover;background-position:center;}
+.exhibit.a .exhibit-img{background-image:url("assets/exhibit-artists-vision.jpg");}
+.exhibit.b .exhibit-img{background-image:url("assets/exhibit-wild-california.jpg");}
+.exhibit-body{padding:1.1rem 1.3rem;}
+.exhibit-tag{display:inline-block;font-family:var(--futura);font-size:0.63rem;letter-spacing:0.06em;text-transform:uppercase;background:var(--periwinkle-soft);color:var(--periwinkle-ink);padding:0.2rem 0.5rem;border-radius:2px;margin-bottom:0.5rem;}
+.exhibit-body h3{font-size:1.15rem;letter-spacing:0.02em;margin:0 0 0.35rem;color:var(--ink);text-transform:none;}
+.exhibit-dates{font-family:var(--futura);font-size:0.82rem;color:var(--ink);margin:0 0 0.3rem;}
+.exhibit-meta{font-size:0.8rem;color:var(--muted);margin:0;line-height:1.5;}
+
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.shop-item{border-radius:4px;overflow:hidden;border:1px solid var(--line);}
+.shop-swatch{height:7rem;background-size:cover;background-position:center;}
+.shop-item.p1 .shop-swatch{background-image:url("assets/shop-paintings.jpg");}
+.shop-item.p2 .shop-swatch{background-image:url("assets/shop-ceramics.jpg");}
+.shop-item.p3 .shop-swatch{background-image:url("assets/shop-jewelry.jpg");}
+.shop-item.p4 .shop-swatch{background:linear-gradient(135deg,#7a7a7a,#b8b8b8);}
+.shop-label{font-family:var(--futura);font-size:0.8rem;letter-spacing:0.03em;padding:0.6rem 0.7rem;background:var(--bg);}
+
+.involve-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.involve-card{border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.3rem;background:var(--surface);}
+.involve-card h3{font-size:1rem;letter-spacing:0.03em;text-transform:uppercase;margin:0 0 0.4rem;color:var(--navy);}
+.involve-card p{font-size:0.82rem;color:var(--muted);margin:0 0 0.9rem;line-height:1.45;}
+.involve-card.photo{padding:0;overflow:hidden;display:flex;flex-direction:column;}
+.involve-card.photo .involve-photo{height:5.2rem;background:url("assets/involve-partners.jpg") center/cover;}
+.involve-card.photo .involve-text{padding:1.2rem 1.3rem;}
+
+.split{display:flex;gap:1.6rem;align-items:stretch;}
+.split-photo{flex:0 0 15rem;border-radius:4px;background:url("assets/classes-banner.jpg") center/cover;min-height:12rem;}
+.split-body{flex:1;}
+.rent-photo{width:100%;height:12rem;border-radius:4px;background:url("assets/rent-room.jpg") center/cover;margin-top:1.2rem;}
+
+.programs{display:flex;flex-direction:column;}
+.program-row{display:grid;grid-template-columns:11rem 1fr;gap:0.2rem 1.2rem;padding:0.9rem 0;border-top:1px solid var(--line);font-size:0.9rem;}
+.program-row:first-child{border-top:none;}
+.program-name{font-weight:600;}
+.program-cadence{font-family:var(--futura);font-size:0.75rem;color:var(--periwinkle-ink);letter-spacing:0.03em;}
+.program-desc{color:var(--muted);font-size:0.84rem;grid-column:2;margin-top:-0.1rem;}
+
+.calls{display:flex;flex-direction:column;gap:0.6rem;}
+.call-row{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:0.8rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:4px;font-size:0.88rem;}
+.call-row .name{font-weight:600;}
+.call-row .meta{font-family:var(--futura);color:var(--muted);font-size:0.76rem;white-space:nowrap;}
+.call-tag{font-family:var(--futura);font-size:0.63rem;letter-spacing:0.05em;text-transform:uppercase;background:var(--orange-soft);color:var(--orange-ink);padding:0.15rem 0.45rem;border-radius:2px;margin-right:0.6rem;}
+
+footer{padding:2.5rem 0;background:var(--navy);color:#fff;font-size:0.85rem;}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:2rem;}
+footer .col-title{font-family:var(--futura);font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;color:#fff;margin:0 0 0.8rem;}
+footer p,footer li{color:#c9cfe8;margin:0 0 0.4rem;line-height:1.55;}
+footer ul{list-style:none;margin:0;padding:0;}
+.newsletter{display:flex;gap:0.5rem;margin-top:0.8rem;}
+.newsletter input{flex:1;min-width:0;border:1px solid #4a5aa0;border-radius:2px;padding:0.5rem 0.7rem;font-size:0.85rem;background:#28347a;color:#fff;}
+.newsletter input::placeholder{color:#9aa5d0;}
+.social{display:flex;gap:0.6rem;margin-top:0.7rem;}
+.social span{font-family:var(--futura);font-size:0.72rem;font-weight:700;letter-spacing:0.03em;border:1px solid var(--orange);color:var(--orange);padding:0.3rem 0.65rem;border-radius:999px;}
+
+@media(max-width:800px){
+  .exhibits,.shop-grid,.involve-grid{grid-template-columns:1fr 1fr;}
+  footer .wrap{grid-template-columns:1fr;}
+}
+@media(max-width:520px){
+  .shop-grid,.involve-grid{grid-template-columns:1fr;}
+}
+@media(max-width:680px){
+  .split{flex-direction:column;}
+  .split-photo{flex:none;min-height:9rem;}
+}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:0.7rem 1.1rem;z-index:100;font-family:var(--futura);font-size:0.85rem;}
+.skip-link:focus{left:0.5rem;top:0.5rem;}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+button.btn{font:inherit;border:none;cursor:pointer;}
+@media (prefers-reduced-motion:no-preference){a,.btn{transition:color 0.15s,background-color 0.15s,border-color 0.15s;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="nav-top">
+    <img class="logo-mark" src="assets/logo-icon.png" alt="Marin Society of Artists home">
+    <div class="wordmark">
+      <span class="since">Since 1927</span>
+      <span class="name">MARIN <span class="light">SOCIETY OF</span> ARTISTS</span>
+    </div>
+    <span class="tagline">Discover. Create. Share.</span>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span class="bar"></span>
+    </button>
+  </div>
+  <nav class="nav" id="site-nav" aria-label="Primary">
+    <a href="#visit">Visit</a>
+    <a href="#gift-shop">Gift Shop</a>
+    <a href="#get-involved">Get Involved</a>
+    <a href="#classes">Classes &amp; Programs</a>
+    <a href="#for-artists">For Artists</a>
+    <a href="#rent">Rent Our Space</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero" id="visit">
+  <h1>Come create. Come connect.</h1>
+  <p>A community arts center in San Rafael, open to look, learn, make, and give — since 1927.</p>
+  <a class="btn" href="#visit">Plan Your Visit</a>
+  <a class="btn ghost" href="#get-involved">Get Involved</a>
+</section>
+
+<div class="facts">
+  <span><b>Hours</b> Wed–Sun, noon–4pm</span>
+  <span><b>Admission</b> Free</span>
+  <span><b>Location</b> 1515 3rd St, San Rafael</span>
+  <span><b>Parking</b> Free 2-hr street + weekend garages</span>
+</div>
+
+<section class="block">
+  <div class="wrap">
+  <div class="block-head"><h2>On View Now</h2><a class="see-all" href="#">All exhibitions →</a></div>
+  <p class="lede">Two shows are up this summer.</p>
+  <div class="exhibits">
+    <div class="exhibit a">
+      <div class="exhibit-img"></div>
+      <div class="exhibit-body">
+        <span class="exhibit-tag">Member show</span>
+        <h3>Artist's Vision 2026</h3>
+        <p class="exhibit-dates">July 8 – Aug 1 · Reception July 10, 5–8pm</p>
+        <p class="exhibit-meta">Music by JT &amp; Friends at the reception.</p>
+      </div>
+    </div>
+    <div class="exhibit b">
+      <div class="exhibit-img"></div>
+      <div class="exhibit-body">
+        <span class="exhibit-tag">Members + invited artists</span>
+        <h3>Wild California 2026</h3>
+        <p class="exhibit-dates">Aug 5 – 29 · Reception Aug 14, 5–8pm</p>
+        <p class="exhibit-meta">With Drawbridge artists. Sponsored by Black Cat Studios &amp; Richardson Bay Boatworks — collecting items for WildCare at the door.</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="block" id="gift-shop">
+  <div class="wrap">
+  <div class="block-head"><h2>Gift Shop</h2><a class="see-all" href="#">Shop all →</a></div>
+  <p class="lede">Jewelry, ceramics, paintings, and cards from MSA member artists, year-round.</p>
+  <div class="shop-grid">
+    <div class="shop-item p1"><div class="shop-swatch"></div><div class="shop-label">Paintings</div></div>
+    <div class="shop-item p2"><div class="shop-swatch"></div><div class="shop-label">Ceramics</div></div>
+    <div class="shop-item p3"><div class="shop-swatch"></div><div class="shop-label">Jewelry</div></div>
+    <div class="shop-item p4"><div class="shop-swatch"></div><div class="shop-label">Cards</div></div>
+  </div>
+  </div>
+</section>
+
+<section class="block" id="get-involved">
+  <div class="wrap">
+  <div class="block-head"><h2>Get Involved</h2></div>
+  <p class="lede">The site's four real asks, side by side for the first time.</p>
+  <div class="involve-grid">
+    <div class="involve-card"><h3>Join / Renew</h3><p>Become a member or renew your dues online.</p><a class="btn ghost" href="#">Join Now</a></div>
+    <div class="involve-card"><h3>Donate</h3><p>Support the mission or the Canal Arts program.</p><a class="btn ghost" href="#">Give</a></div>
+    <div class="involve-card"><h3>Volunteer</h3><p>Membership Coordinator role open — 2–4 hrs/month, mostly remote.</p><a class="btn ghost" href="#">Learn More</a></div>
+    <div class="involve-card photo"><div class="involve-photo"></div><div class="involve-text"><h3>Community Partners</h3><p>SF-Marin Food Bank, St. Vincent de Paul, Youth in Arts.</p><a class="btn ghost" href="#">Our Partners</a></div></div>
+  </div>
+  </div>
+</section>
+
+<section class="block" id="classes">
+  <div class="wrap">
+  <div class="block-head"><h2>Classes &amp; Programs</h2><a class="see-all" href="#">Full schedule →</a></div>
+  <div class="split">
+    <div class="split-photo" role="img" aria-label="Painting class in progress"></div>
+    <div class="split-body">
+      <div class="programs">
+        <div class="program-row"><span class="program-name">2nd Friday Art Walk</span><span class="program-cadence">Monthly, 5–8pm</span><span class="program-desc">Galleries and studios open together, the same evening each month.</span></div>
+        <div class="program-row"><span class="program-name">Blue Light Series</span><span class="program-cadence">Ongoing, virtual</span><span class="program-desc">Poetry and music sessions at the gallery, streamed for those who can't attend.</span></div>
+        <div class="program-row"><span class="program-name">Crossroads Program</span><span class="program-cadence">Ongoing</span><span class="program-desc">Community-facing programming beyond the gallery walls.</span></div>
+        <div class="program-row"><span class="program-name">Adult &amp; Children's Classes</span><span class="program-cadence">Multiple sessions</span><span class="program-desc">Instructor-led and drop-in groups, all skill levels.</span></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="block" id="for-artists">
+  <div class="wrap">
+  <div class="block-head"><h2>For Artists — Open Calls</h2><a class="see-all" href="#">All calls →</a></div>
+  <div class="calls">
+    <div class="call-row"><span class="name"><span class="call-tag">Open</span>Colorful Expressions</span><span class="meta">Sept. show, with Vivalon</span></div>
+    <div class="call-row"><span class="name"><span class="call-tag">Open</span>All About Women 2026</span><span class="meta">Online, 18+ · Deadline Sept 15</span></div>
+    <div class="call-row"><span class="name"><span class="call-tag">Open</span>Through the Lens 2026</span><span class="meta">See full listing for dates</span></div>
+    <div class="call-row"><span class="name"><span class="call-tag">Open</span>Artist's Favorite 2026</span><span class="meta">See full listing for dates</span></div>
+  </div>
+  </div>
+</section>
+
+<section class="block" id="rent">
+  <div class="wrap">
+  <div class="block-head"><h2>Rent Our Space</h2><a class="see-all" href="#">Availability →</a></div>
+  <p class="lede">Open to the public for meetings, workshops, and pop-up shows — not just artists. Meeting Room, 7- or 12-day Gallery Rental, and Artist Studios.</p>
+  <div class="rent-photo" role="img" aria-label="Meeting room available for rent"></div>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+  <div>
+    <div class="col-title">Visit</div>
+    <p>1515 3rd Street<br>San Rafael, CA 94901</p>
+    <p>Wed–Sun, noon–4pm<br>415-454-9561</p>
+    <p style="margin-top:0.6rem;">"San Rafael named #3 in the Top 40 Most Arts-Vibrant Communities of 2024."</p>
+  </div>
+  <div>
+    <div class="col-title">Quick Links</div>
+    <ul>
+      <li><a href="#about">About &amp; Press</a></li>
+      <li>Rentals: msarentals@outlook.com</li>
+      <li>Show entries: shows@msartists.org</li>
+      <li><a href="#contact">Contact form</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="col-title">Stay Connected</div>
+    <p>Monthly newsletter — shows, receptions, and open calls.</p>
+    <form class="newsletter" aria-label="Newsletter signup">
+      <label class="visually-hidden" for="newsletter-email">Email address</label>
+      <input id="newsletter-email" type="email" placeholder="you@email.com" autocomplete="email">
+      <button class="btn" type="submit" style="margin:0;padding:0.5rem 0.9rem;">Sign Up</button>
+    </form>
+    <div class="social">
+      <a href="https://www.instagram.com/msa_gallery" aria-label="Marin Society of Artists on Instagram"><span>Instagram</span></a>
+      <a href="#" aria-label="Marin Society of Artists on YouTube"><span>YouTube</span></a>
+    </div>
+  </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
+  function closeMenu(){
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Open menu');
+  }
+  function openMenu(){
+    nav.classList.add('open');
+    toggle.setAttribute('aria-expanded','true');
+    toggle.setAttribute('aria-label','Close menu');
+  }
+  toggle.addEventListener('click', function(){
+    var isOpen = nav.classList.contains('open');
+    isOpen ? closeMenu() : openMenu();
+  });
+  nav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', closeMenu);
+  });
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 760) closeMenu();
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /examples/
 
 # AI assistants & answer engines (ChatGPT, Perplexity, Claude)
 User-agent: GPTBot
