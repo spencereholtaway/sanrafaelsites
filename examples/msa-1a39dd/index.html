@@ -1,6 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) — disabled on localhost/local dev so testing doesn't pollute GA4/Ads data -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  (function () {
+    var host = location.hostname;
+    var isLocal = host === "localhost" || host === "127.0.0.1" || host === "::1" || location.protocol === "file:";
+    if (isLocal) {
+      window["ga-disable-G-Z8TMT9YLQB"] = true;
+      window["ga-disable-AW-18371892051"] = true;
+      return;
+    }
+    gtag("config", "G-Z8TMT9YLQB");
+    gtag("config", "AW-18371892051");
+  })();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8TMT9YLQB"></script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
@@ -18,7 +37,9 @@
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 *{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;}
+section[id]{scroll-margin-top:7rem;}
 a{color:inherit;text-decoration:none;}
 h1,h2,h3,h4{font-family:var(--futura);font-weight:400;}
 
@@ -123,7 +144,11 @@ section.block{padding:3rem 0;border-bottom:1px solid var(--line);}
 .involve-card h3{font-size:1rem;letter-spacing:0.03em;text-transform:uppercase;margin:0 0 0.4rem;color:var(--navy);}
 .involve-card p{font-size:0.82rem;color:var(--muted);margin:0 0 0.9rem;line-height:1.45;}
 .involve-card.photo{padding:0;overflow:hidden;display:flex;flex-direction:column;}
-.involve-card.photo .involve-photo{height:5.2rem;background:url("assets/involve-partners.jpg") center/cover;}
+.involve-card.photo .involve-photo{height:5.2rem;background-size:cover;background-position:center;}
+.involve-card.photo.i1 .involve-photo{background-image:url("assets/building.jpg");}
+.involve-card.photo.i2 .involve-photo{background-image:url("assets/hero-bg.jpg");}
+.involve-card.photo.i3 .involve-photo{background-image:url("assets/classes-banner.jpg");}
+.involve-card.photo.i4 .involve-photo{background-image:url("assets/involve-partners.jpg");}
 .involve-card.photo .involve-text{padding:1.2rem 1.3rem;}
 
 .split{display:flex;gap:1.6rem;align-items:stretch;}
@@ -173,13 +198,13 @@ button.btn{font:inherit;border:none;cursor:pointer;}
 @media (prefers-reduced-motion:no-preference){a,.btn{transition:color 0.15s,background-color 0.15s,border-color 0.15s;}}
 </style>
 </head>
-<body>
+<body id="top">
 
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <header>
   <div class="nav-top">
-    <img class="logo-mark" src="assets/logo-icon.png" alt="Marin Society of Artists home">
+    <a href="#top"><img class="logo-mark" src="assets/logo-icon.png" alt="Marin Society of Artists home"></a>
     <div class="wordmark">
       <span class="since">Since 1927</span>
       <span class="name">MARIN <span class="light">SOCIETY OF</span> ARTISTS</span>
@@ -261,10 +286,10 @@ button.btn{font:inherit;border:none;cursor:pointer;}
   <div class="block-head"><h2>Get Involved</h2></div>
   <p class="lede">The site's four real asks, side by side for the first time.</p>
   <div class="involve-grid">
-    <div class="involve-card"><h3>Join / Renew</h3><p>Become a member or renew your dues online.</p><a class="btn ghost" href="#">Join Now</a></div>
-    <div class="involve-card"><h3>Donate</h3><p>Support the mission or the Canal Arts program.</p><a class="btn ghost" href="#">Give</a></div>
-    <div class="involve-card"><h3>Volunteer</h3><p>Membership Coordinator role open — 2–4 hrs/month, mostly remote.</p><a class="btn ghost" href="#">Learn More</a></div>
-    <div class="involve-card photo"><div class="involve-photo"></div><div class="involve-text"><h3>Community Partners</h3><p>SF-Marin Food Bank, St. Vincent de Paul, Youth in Arts.</p><a class="btn ghost" href="#">Our Partners</a></div></div>
+    <div class="involve-card photo i1"><div class="involve-photo"></div><div class="involve-text"><h3>Join / Renew</h3><p>Become a member or renew your dues online.</p><a class="btn ghost" href="#">Join Now</a></div></div>
+    <div class="involve-card photo i2"><div class="involve-photo"></div><div class="involve-text"><h3>Donate</h3><p>Support the mission or the Canal Arts program.</p><a class="btn ghost" href="#">Give</a></div></div>
+    <div class="involve-card photo i3"><div class="involve-photo"></div><div class="involve-text"><h3>Volunteer</h3><p>Membership Coordinator role open — 2–4 hrs/month, mostly remote.</p><a class="btn ghost" href="#">Learn More</a></div></div>
+    <div class="involve-card photo i4"><div class="involve-photo"></div><div class="involve-text"><h3>Community Partners</h3><p>SF-Marin Food Bank, St. Vincent de Paul, Youth in Arts.</p><a class="btn ghost" href="#">Our Partners</a></div></div>
   </div>
   </div>
 </section>
