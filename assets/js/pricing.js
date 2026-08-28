@@ -17,7 +17,7 @@
  */
 window.SRS_PRICING = {
   rates: {
-    homepage: 999,
+    homepage: 499,
     page: 300,
     cms: 250,
     integration: 250,
