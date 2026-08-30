@@ -11,6 +11,8 @@
 
   --font-body: "DM Sans", system-ui, sans-serif;
   --font-head: "Fraunces", Georgia, serif;
+  --font-body-weight: 400;
+  --font-head-weight: 550;
 
   --wrap: 1120px;
   --gap: 1.5rem;
@@ -51,12 +53,16 @@ button:focus-visible,
 
 /* ---------- Reset ---------- */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 112px;
+}
 body {
   margin: 0;
   background: var(--off-white);
   color: var(--ink);
   font-family: var(--font-body);
+  font-weight: var(--font-body-weight);
   font-size: 17px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
@@ -75,7 +81,7 @@ h1, h2, h3, p { margin: 0; }
 h1, h2, h3 {
   font-family: var(--font-head);
   font-variation-settings: "WONK" 0.4, "opsz" 40;
-  font-weight: 550;
+  font-weight: var(--font-head-weight);
   letter-spacing: -0.01em;
   line-height: 1.15;
 }
@@ -104,7 +110,7 @@ h1, h2, h3 {
 }
 
 .wordmark {
-  font-family: var(--font-body);
+  font-family: "DM Sans", system-ui, sans-serif;
   font-weight: 600;
   font-size: 1.15rem;
   letter-spacing: -0.01em;
@@ -156,19 +162,57 @@ h1, h2, h3 {
 }
 
 /* ---------- Nav ---------- */
+/* .nav is the standard in-flow header: it scrolls away with the page like
+   any other content, rather than pinning itself flush to the very top of
+   the viewport. That matters for Safari's translucent toolbar ("Liquid
+   Glass") effect, which blurs whatever's actually behind it — a header
+   permanently glued to y:0 blocks that, since Safari never sees real page
+   content there. Once scrolled, .nav-pill (below) takes over as the fixed
+   floating nav, inset from the top edge so a sliver of real content is
+   always exposed. */
 .nav {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 50;
-  background: rgba(244, 241, 234, 0.92);
+  background: color-mix(in srgb, var(--off-white) 92%, transparent);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(43, 38, 34, 0.08);
 }
 .nav__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 68px;
+}
+
+/* Floating pill nav: fixed, hidden until scrolled, animates in. */
+.nav-pill {
+  position: fixed;
+  top: 24px;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  margin: 0 auto;
+  width: calc(100% - 32px);
+  max-width: 1200px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--off-white) 92%, transparent);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--ink) 14%, transparent);
+  opacity: 0;
+  transform: translateY(-16px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.nav-pill.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-pill .nav__inner {
+  height: 72px;
+  max-width: none;
+  margin: 0;
+  padding-left: 28px;
+  padding-right: 24px;
 }
 .nav__links {
   display: flex;
@@ -216,9 +260,9 @@ h1, h2, h3 {
   transform: translateX(-50%) translateY(-6px);
   min-width: 190px;
   background: var(--off-white);
-  border: 1px solid rgba(43, 38, 34, 0.08);
+  border: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
   border-radius: 8px;
-  box-shadow: 0 12px 28px rgba(43, 38, 34, 0.14);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--ink) 14%, transparent);
   padding: 0.4rem;
   list-style: none;
   opacity: 0;
@@ -237,26 +281,39 @@ h1, h2, h3 {
   border-radius: 5px;
   font-size: 0.9rem;
 }
-.nav__dropdown-menu a:hover { background: rgba(43, 38, 34, 0.05); }
+.nav__dropdown-menu a:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
 
 .nav__toggle {
   display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 32px;
-  height: 32px;
+  position: relative;
+  width: 28px;
+  height: 28px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  flex-shrink: 0;
 }
 .nav__toggle span {
-  display: block;
+  position: absolute;
+  left: 4px;
+  right: 4px;
   height: 2px;
-  width: 100%;
   background: var(--ink);
-  border-radius: 1px;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+}
+.nav__toggle span:nth-child(1) { top: 9px; }
+.nav__toggle span:nth-child(2) { top: 14px; }
+.nav__toggle span:nth-child(3) { top: 19px; }
+.nav__toggle[aria-expanded="true"] span:nth-child(1) {
+  top: 14px;
+  transform: rotate(45deg);
+}
+.nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav__toggle[aria-expanded="true"] span:nth-child(3) {
+  top: 14px;
+  transform: rotate(-45deg);
 }
 
 /* ---------- Buttons ---------- */
@@ -276,7 +333,7 @@ h1, h2, h3 {
 }
 .btn--primary:hover { transform: translateY(-1px); }
 .btn--ghost {
-  border: 1px solid rgba(43, 38, 34, 0.25);
+  border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
   color: var(--ink);
 }
 .btn--ghost:hover { border-color: var(--ink); }
@@ -294,6 +351,45 @@ h1, h2, h3 {
   opacity: 0.05;
   pointer-events: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+/* Optional header background image, set per-palette via the design panel
+   (--header-bg-image). background-attachment: fixed pins the image to the
+   viewport rather than this section, so it reads as a window onto a fixed
+   backdrop rather than an image that scrolls with the page. The tint is
+   blended into the image itself (background-blend-mode, two background
+   layers on one pseudo) rather than stacked as a separate element, since
+   .hero::before is already used for the noise texture above. .hero's own
+   overflow: hidden clips the filter's blur (and the zoom transform below)
+   so neither can bleed into neighboring sections. Zoom is a transform on
+   the whole pseudo-element rather than background-size, since background-size
+   can't express "bigger than cover" without knowing the image's own aspect
+   ratio; scaling the already-covered box gives the same result for any image. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--off-white) var(--header-bg-tint, 0%), transparent),
+      color-mix(in srgb, var(--off-white) var(--header-bg-tint, 0%), transparent)
+    ),
+    var(--header-bg-image, none);
+  background-size: cover, cover;
+  background-position: center, var(--header-bg-pos-x, 50%) var(--header-bg-pos-y, 50%);
+  background-attachment: fixed, fixed;
+  background-blend-mode: var(--header-bg-blend, normal), normal;
+  transform: scale(var(--header-bg-zoom, 1));
+  transform-origin: center;
+  filter:
+    contrast(var(--header-bg-contrast, 1))
+    saturate(var(--header-bg-saturate, 1))
+    brightness(var(--header-bg-brightness, 1))
+    opacity(var(--header-bg-fade, 1))
+    blur(var(--header-bg-blur, 0px))
+    grayscale(var(--header-bg-grayscale, 0%))
+    hue-rotate(var(--header-bg-hue, 0deg));
 }
 .hero__inner {
   text-align: center;
@@ -364,8 +460,8 @@ h1, h2, h3 {
 }
 .case-study__media:has(.case-study__media-placeholder) {
   aspect-ratio: 16 / 9;
-  background: rgba(244, 241, 234, 0.06);
-  border: 1px dashed rgba(244, 241, 234, 0.25);
+  background: color-mix(in srgb, var(--off-white) 6%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--off-white) 25%, transparent);
 }
 .case-study__media img,
 .case-study__media video {
@@ -374,7 +470,7 @@ h1, h2, h3 {
   display: block;
 }
 .case-study__media-placeholder {
-  color: rgba(244, 241, 234, 0.45);
+  color: color-mix(in srgb, var(--off-white) 45%, transparent);
   font-size: 0.9rem;
   letter-spacing: 0.02em;
 }
@@ -387,7 +483,7 @@ h1, h2, h3 {
 }
 .case-study__meta dl div {
   padding: 1rem 0;
-  border-top: 1px solid rgba(244, 241, 234, 0.15);
+  border-top: 1px solid color-mix(in srgb, var(--off-white) 15%, transparent);
 }
 .case-study__meta dl div:first-child { border-top: none; }
 .case-study__meta dt {
@@ -415,11 +511,11 @@ h1, h2, h3 {
 .case-study__more {
   margin-top: 2.5rem;
   padding: 2.25rem 0;
-  border-top: 1px solid rgba(244, 241, 234, 0.15);
+  border-top: 1px solid color-mix(in srgb, var(--off-white) 15%, transparent);
   text-align: center;
 }
 .case-study__more .btn--ghost {
-  border-color: rgba(244, 241, 234, 0.3);
+  border-color: color-mix(in srgb, var(--off-white) 30%, transparent);
   color: var(--off-white);
 }
 .case-study__more .btn--ghost:hover {
@@ -482,7 +578,7 @@ h1, h2, h3 {
   max-width: 720px;
 }
 .faq__item {
-  border-bottom: 1px solid rgba(43, 38, 34, 0.15);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 15%, transparent);
   padding: 1.1rem 0;
 }
 .faq__item summary {
@@ -721,7 +817,7 @@ h1, h2, h3 {
   justify-content: space-between;
   gap: 1.5rem;
   padding: 1.1rem 1.75rem;
-  border-top: 1px solid rgba(43, 38, 34, 0.1);
+  border-top: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
 }
 .pricing__addon-name {
   font-size: 1rem;
@@ -758,7 +854,7 @@ h1, h2, h3 {
 }
 .pricing__breakdown-subtotal {
   font-weight: 600;
-  border-top: 1px solid rgba(43, 38, 34, 0.25) !important;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent) !important;
 }
 .pricing__breakdown-subtotal,
 .pricing__breakdown-discount {
@@ -835,7 +931,7 @@ h1, h2, h3 {
   flex-direction: column;
   gap: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(244, 241, 234, 0.15);
+  border-bottom: 1px solid color-mix(in srgb, var(--off-white) 15%, transparent);
 }
 .footer__location {
   margin-top: 0.6rem;
@@ -910,7 +1006,7 @@ h1, h2, h3 {
     align-items: flex-start;
     padding: 1.5rem;
     gap: 1.25rem;
-    border-bottom: 1px solid rgba(43, 38, 34, 0.08);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
     transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
@@ -957,7 +1053,7 @@ h1, h2, h3 {
   position: relative;
   padding: 4rem 0 3.5rem;
   overflow: hidden;
-  border-bottom: 1px solid rgba(43, 38, 34, 0.08);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
 }
 .industry-hero h1 {
   margin-top: 0.75rem;
@@ -993,11 +1089,11 @@ h1, h2, h3 {
   justify-content: center;
 }
 .industry-hero__media:has(.industry-hero__media-placeholder) {
-  border: 1px dashed rgba(43, 38, 34, 0.25);
-  background: rgba(43, 38, 34, 0.04);
+  border: 1px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
 }
 .industry-hero__media-placeholder {
-  color: rgba(43, 38, 34, 0.4);
+  color: color-mix(in srgb, var(--ink) 40%, transparent);
   font-size: 0.9rem;
   letter-spacing: 0.02em;
 }
@@ -1042,7 +1138,7 @@ h1, h2, h3 {
 }
 .package__group li {
   padding: 0.7rem 0;
-  border-top: 1px solid rgba(244, 241, 234, 0.15);
+  border-top: 1px solid color-mix(in srgb, var(--off-white) 15%, transparent);
 }
 .package__group li:first-of-type {
   border-top: none;
@@ -1078,7 +1174,7 @@ h1, h2, h3 {
   opacity: 1;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(43, 38, 34, 0.35);
+  text-decoration-color: color-mix(in srgb, var(--ink) 35%, transparent);
 }
 .credibility-anchor p + p {
   margin-top: 0.75rem;
@@ -1136,7 +1232,7 @@ h1, h2, h3 {
   object-fit: contain;
 }
 .about-community__media-placeholder {
-  color: rgba(43, 38, 34, 0.4);
+  color: color-mix(in srgb, var(--ink) 40%, transparent);
   font-size: 0.9rem;
   letter-spacing: 0.02em;
 }
@@ -1180,7 +1276,7 @@ h1, h2, h3 {
   gap: 1.75rem;
 }
 .areas-grid__item {
-  border-top: 1px solid rgba(43, 38, 34, 0.15);
+  border-top: 1px solid color-mix(in srgb, var(--ink) 15%, transparent);
   padding-top: 1.5rem;
 }
 .areas-grid__item h3 {

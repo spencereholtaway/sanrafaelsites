@@ -1,47 +1,80 @@
-const navToggle = document.getElementById("navToggle");
-const navMenu = document.getElementById("navMenu");
-const navDropdown = document.getElementById("navDropdown");
-const dropdownToggle = document.getElementById("dropdownToggle");
+function bindNavInteractions(root, idSuffix) {
+  const navToggle = root.querySelector(".nav__toggle");
+  const navMenu = root.querySelector(".nav__links");
+  const navDropdown = root.querySelector(".nav__dropdown");
+  const dropdownToggle = root.querySelector(".nav__dropdown-toggle");
+  const dropdownMenu = root.querySelector(".nav__dropdown-menu");
 
-navToggle.addEventListener("click", () => {
-  const isOpen = navMenu.classList.toggle("is-open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
-  if (!isOpen && navDropdown) {
-    navDropdown.classList.remove("is-open");
-    dropdownToggle.setAttribute("aria-expanded", "false");
+  if (idSuffix) {
+    [navToggle, navMenu, navDropdown, dropdownToggle, dropdownMenu].forEach((el) => {
+      if (el && el.id) el.id += idSuffix;
+    });
+    if (navToggle && navMenu) navToggle.setAttribute("aria-controls", navMenu.id);
+    if (dropdownToggle && dropdownMenu) dropdownToggle.setAttribute("aria-controls", dropdownMenu.id);
   }
-});
 
-navMenu.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("is-open");
-    navToggle.setAttribute("aria-expanded", "false");
-  });
-});
-
-if (navDropdown && dropdownToggle) {
-  dropdownToggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isOpen = navDropdown.classList.toggle("is-open");
-    dropdownToggle.setAttribute("aria-expanded", String(isOpen));
-    if (isOpen && typeof gtag === "function") {
-      gtag("event", "nav_industries_open");
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!navDropdown.contains(e.target)) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    if (!isOpen && navDropdown) {
       navDropdown.classList.remove("is-open");
       dropdownToggle.setAttribute("aria-expanded", "false");
     }
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      navDropdown.classList.remove("is-open");
-      dropdownToggle.setAttribute("aria-expanded", "false");
-    }
+  navMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
   });
+
+  if (navDropdown && dropdownToggle) {
+    dropdownToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = navDropdown.classList.toggle("is-open");
+      dropdownToggle.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen && typeof gtag === "function") {
+        gtag("event", "nav_industries_open");
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!navDropdown.contains(e.target)) {
+        navDropdown.classList.remove("is-open");
+        dropdownToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        navDropdown.classList.remove("is-open");
+        dropdownToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+}
+
+const siteHeader = document.querySelector(".nav");
+bindNavInteractions(siteHeader, null);
+
+let navPill = null;
+if (siteHeader) {
+  navPill = siteHeader.cloneNode(true);
+  navPill.classList.remove("nav");
+  navPill.classList.add("nav-pill");
+  navPill.setAttribute("aria-hidden", "true");
+  document.body.appendChild(navPill);
+  bindNavInteractions(navPill, "-pill");
+
+  const updatePillVisibility = () => {
+    const visible = window.scrollY > 80;
+    navPill.classList.toggle("is-visible", visible);
+    navPill.setAttribute("aria-hidden", String(!visible));
+  };
+
+  updatePillVisibility();
+  window.addEventListener("scroll", updatePillVisibility, { passive: true });
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
